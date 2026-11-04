@@ -2,6 +2,7 @@ package tui
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -61,16 +62,17 @@ func (m *model) rebuildDiff() {
 		if len(edit.Lines) == 0 {
 			m.addTextRows("这条记录没有差异正文。", edit.ID, width)
 		}
+		prepared := m.highlights.get(file.Path, edit)
 		if m.opts.Preferences.Split && width >= 60 {
 			leftWidth := (width - 1) / 2
-			for _, pair := range changes.SideBySide(edit.Lines) {
+			for _, pair := range prepared.Pairs {
 				if pair.Left != nil && (pair.Left.Kind == changes.Hunk || pair.Left.Kind == changes.Metadata) {
-					for _, row := range m.unifiedRows(*pair.Left, width) {
+					for _, row := range m.metadataRows(pair.Left.Line, width) {
 						m.rows = append(m.rows, displayRow{text: row, editID: edit.ID})
 					}
 					continue
 				}
-				left, right := m.sideRows(pair.Left, leftWidth, true), m.sideRows(pair.Right, width-leftWidth-1, false)
+				left, right := m.codeRows(pair.Left, leftWidth, prepared.Digits, true), m.codeRows(pair.Right, width-leftWidth-1, prepared.Digits, false)
 				for i := 0; i < max(len(left), len(right)); i++ {
 					l, r := strings.Repeat(" ", leftWidth), strings.Repeat(" ", width-leftWidth-1)
 					if i < len(left) {
@@ -83,8 +85,15 @@ func (m *model) rebuildDiff() {
 				}
 			}
 		} else {
-			for _, line := range edit.Lines {
-				for _, row := range m.unifiedRows(line, width) {
+			for i := range prepared.Lines {
+				line := &prepared.Lines[i]
+				var rows []string
+				if line.Kind == changes.Hunk || line.Kind == changes.Metadata {
+					rows = m.metadataRows(line.Line, width)
+				} else {
+					rows = m.codeRows(line, width, prepared.Digits, false)
+				}
+				for _, row := range rows {
 					m.rows = append(m.rows, displayRow{text: row, editID: edit.ID})
 				}
 			}
@@ -108,73 +117,15 @@ func (m *model) pieces(text string, width int) []string {
 	return []string{ansi.Cut(text, m.diffColumn, m.diffColumn+width)}
 }
 
-func number(n int) string {
-	if n == 0 {
-		return "    "
-	}
-	return fmt.Sprintf("%4d", n)
-}
-
-func (m *model) unifiedRows(line changes.Line, width int) []string {
+func (m *model) metadataRows(line changes.Line, width int) []string {
 	p := m.palette()
-	if line.Kind == changes.Hunk || line.Kind == changes.Metadata {
-		c := p.muted
-		if line.Kind == changes.Hunk {
-			c = p.accent
-		}
-		var rows []string
-		for _, text := range m.pieces(line.Text, width-2) {
-			rows = append(rows, style(c).Render(fit("  "+text, width)))
-		}
-		return rows
+	c := p.muted
+	if line.Kind == changes.Hunk {
+		c = p.accent
 	}
-	mark := " "
-	fg, bg := p.fg, p.bg
-	if line.Kind == changes.Added {
-		mark, fg, bg = "+", p.add, p.addBG
-	}
-	if line.Kind == changes.Removed {
-		mark, fg, bg = "−", p.remove, p.removeBG
-	}
-	prefix := number(line.Old) + " " + number(line.New) + " " + mark + " "
-	prefixWidth := ansi.StringWidth(prefix)
 	var rows []string
-	for i, text := range m.pieces(line.Text, width-prefixWidth) {
-		gutter := prefix
-		if i > 0 {
-			gutter = strings.Repeat(" ", prefixWidth-2) + "↳ "
-		}
-		row := style(p.muted).Background(bg).Render(gutter) + style(fg).Background(bg).Render(fit(text, width-prefixWidth))
-		rows = append(rows, row)
-	}
-	return rows
-}
-
-func (m *model) sideRows(line *changes.Line, width int, left bool) []string {
-	if line == nil {
-		return []string{strings.Repeat(" ", width)}
-	}
-	p := m.palette()
-	lineNumber, mark := line.New, " "
-	if left {
-		lineNumber = line.Old
-	}
-	fg, bg := p.fg, p.bg
-	if line.Kind == changes.Added {
-		mark, fg, bg = "+", p.add, p.addBG
-	}
-	if line.Kind == changes.Removed {
-		mark, fg, bg = "−", p.remove, p.removeBG
-	}
-	prefix := number(lineNumber) + " " + mark + " "
-	prefixWidth := ansi.StringWidth(prefix)
-	var rows []string
-	for i, text := range m.pieces(line.Text, width-prefixWidth) {
-		gutter := prefix
-		if i > 0 {
-			gutter = strings.Repeat(" ", prefixWidth-2) + "↳ "
-		}
-		rows = append(rows, style(p.muted).Background(bg).Render(gutter)+style(fg).Background(bg).Render(fit(text, width-prefixWidth)))
+	for _, text := range m.pieces(line.Text, width-2) {
+		rows = append(rows, style(c).Render(fit("  "+text, width)))
 	}
 	return rows
 }
@@ -184,15 +135,23 @@ func (m *model) maxColumn() int {
 	if file == nil {
 		return 0
 	}
-	width := m.diffWidth() - 12
-	if m.opts.Preferences.Split && m.diffWidth() >= 60 {
-		width = (m.diffWidth()-1)/2 - 7
+	width := m.diffWidth()
+	if m.opts.Preferences.Split && width >= 60 {
+		width = (width - 1) / 2
 	}
 	maximum := 0
 	for _, edit := range file.Edits {
+		digits := 1
 		for _, line := range edit.Lines {
-			maximum = max(maximum, ansi.StringWidth(strings.ReplaceAll(line.Text, "\t", "    ")))
+			digits = max(digits, len(strconv.Itoa(max(line.Old, line.New))))
+		}
+		for _, line := range edit.Lines {
+			available := width - digits - 4
+			if line.Kind == changes.Hunk || line.Kind == changes.Metadata {
+				available = m.diffWidth() - 2
+			}
+			maximum = max(maximum, ansi.StringWidth(strings.ReplaceAll(line.Text, "\t", "    "))-available)
 		}
 	}
-	return max(0, maximum-width)
+	return max(0, maximum)
 }

@@ -47,6 +47,7 @@ type model struct {
 	rows                       []displayRow
 	anchors                    []int
 	collapsed                  map[string]bool
+	highlights                 highlightCache
 	help                       bool
 	loading                    bool
 	listLoading                bool
@@ -150,6 +151,7 @@ func (m *model) openThread(id string) tea.Cmd {
 	m.fileQuery, m.fileCursor, m.fileOffset, m.diffOffset, m.diffColumn = "", 0, 0, 0, 0
 	m.session, m.files, m.rows = changes.Session{}, nil, nil
 	m.collapsed = make(map[string]bool)
+	m.highlights = highlightCache{}
 	m.opts.Preferences.LastThread = id
 	updates := make(chan changes.Progress, 1)
 	m.updates = updates

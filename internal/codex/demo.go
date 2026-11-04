@@ -34,7 +34,53 @@ func NewDemo() *Demo {
 	})}
 	website := Thread{ID: "demo-website", Name: "网站导航调整", CWD: "/demo/website", HistoryMode: "legacy", UpdatedAt: 1793439000}
 	website.Turns = []Turn{makeTurn("web-1", 1793439000, "添加一个文档入口。", []FileChange{{Path: "src/navigation.ts", Kind: ChangeKind{Type: "update"}, Diff: "@@ -1,3 +1,4 @@\n export const links = [\n   { label: 'Home', href: '/' },\n+  { label: 'Docs', href: '/docs' },\n ];\n"}})}
-	return &Demo{threads: []Thread{camera, website, child}}
+	diagram := Thread{ID: "demo-diff", Name: "图表排版与导出设置", CWD: "/demo/diagram", HistoryMode: "legacy", UpdatedAt: 1793752200}
+	diagram.Turns = []Turn{makeTurn("diagram-1", 1793752200, "调整图中文字的位置，说明同步与备份的区别，并更新导出配置。", []FileChange{
+		{Path: "docs/overview.svg", Kind: ChangeKind{Type: "update"}, Diff: `@@ -148,11 +148,11 @@
+   <g class="diagram-labels">
+-    <text class="title" x="160" y="104">同步副本</text>
+-    <text class="note" x="160" y="134">实时更新</text>
+-    <text class="note" x="160" y="158">可以直接查询</text>
+-    <text class="note" x="160" y="182">保留最新状态</text>
++    <text class="title" x="160" y="112">同步副本</text>
++    <text class="note" x="160" y="142">实时更新</text>
++    <text class="note" x="160" y="166">需要单独开启查询</text>
++    <text class="note" x="160" y="190">保留最新状态</text>
+   <!-- Backup schedule -->
+-    <text class="title" x="520" y="104">定期备份</text>
+-    <text class="note" x="520" y="134">每天生成快照</text>
+-    <text class="note" x="520" y="158">保存最近 7 个版本</text>
+-    <text class="note" x="520" y="182">恢复时覆盖现有文件</text>
++    <text class="title" x="520" y="112">定期备份</text>
++    <text class="note" x="520" y="142">每天生成快照</text>
++    <text class="note" x="520" y="166">保存最近 30 个版本</text>
++    <text class="note" x="520" y="190">恢复时写入新目录</text>
+   </g>
+`},
+		{Path: "src/export.ts", Kind: ChangeKind{Type: "update"}, Diff: `@@ -12,6 +12,7 @@
+ export function exportDiagram(name: string) {
+-  const format = 'png';
+-  const scale = 1;
++  const format = 'svg';
++  const scale = 2;
++  const preserveText = true;
+   return render(name, {
+-    format, scale,
++    format, scale, preserveText,
+   });
+`},
+		{Path: "export/settings.json", Kind: ChangeKind{Type: "update"}, Diff: `@@ -1,5 +1,5 @@
+ {
+-  "format": "png",
+-  "scale": 1,
+-  "directory": "output"
++  "format": "svg",
++  "scale": 2,
++  "directory": "exports"
+ }
+`},
+	})}
+	return &Demo{threads: []Thread{camera, website, diagram, child}}
 }
 
 func (d *Demo) ListThreads(_ context.Context, options ListOptions) ([]Thread, error) {

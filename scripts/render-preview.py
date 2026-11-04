@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Render an ANSI terminal capture of --demo as a self-contained SVG.
 
-Usage: tmux capture-pane -pe -t <demo-pane> | python3 scripts/render-preview.py
+Usage: tmux capture-pane -peN -t <demo-pane> | python3 scripts/render-preview.py
 Only synthetic demo captures are accepted. No browser or image assets required.
 """
 
+import argparse
 import html
 import re
 import sys
@@ -36,6 +37,10 @@ def columns(text):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--theme", choices=["dark", "light"], default="dark")
+    args = parser.parse_args()
+    default_fg, default_bg = ("#333333", "#faf4ed") if args.theme == "light" else ("#e5e9eb", "#171a1d")
     data = sys.stdin.read()
     plain = SGR.sub("", data)
     if "DEMO · 合成数据" not in plain:
@@ -50,13 +55,13 @@ def main():
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{canvas_w:g}" height="{canvas_h:g}" viewBox="0 0 {canvas_w:g} {canvas_h:g}">',
         '<title>Codex Changes — synthetic terminal demo</title>',
         '<desc>A file list on the left and the selected file’s chronological patches on the right. All data is synthetic.</desc>',
-        f'<rect width="{canvas_w:g}" height="{canvas_h:g}" rx="10" fill="#171a1d"/>',
+        f'<rect width="{canvas_w:g}" height="{canvas_h:g}" rx="10" fill="{default_bg}"/>',
         '<g fill="#647178"><circle cx="22" cy="20" r="4"/><circle cx="38" cy="20" r="4"/><circle cx="54" cy="20" r="4"/></g>',
-        '<text x="78" y="25" fill="#9ba5ac" font-family="monospace" font-size="13">codex-changes --demo</text>',
+        '<text x="78" y="25" fill="#9ba5ac" font-family="monospace" font-size="13">Codex Changes — DEMO</text>',
         '<g font-family="Menlo, DejaVu Sans Mono, Noto Sans Mono CJK SC, monospace" font-size="16">',
     ]
     for row, line in enumerate(lines):
-        fg, bg, bold, dim, inverse = "#e5e9eb", "#171a1d", False, False, False
+        fg, bg, bold, dim, inverse = default_fg, default_bg, False, False, False
         column = 0
         for part in re.split(r"(\x1b\[[0-9;:]*m)", line):
             match = SGR.fullmatch(part)
@@ -66,7 +71,7 @@ def main():
                 while i < len(codes):
                     code = codes[i]
                     if code == 0:
-                        fg, bg, bold, dim, inverse = "#e5e9eb", "#171a1d", False, False, False
+                        fg, bg, bold, dim, inverse = default_fg, default_bg, False, False, False
                     elif code == 1:
                         bold = True
                     elif code == 2:
@@ -100,9 +105,9 @@ def main():
                     elif 100 <= code <= 107:
                         bg = BASIC[code - 100 + 8]
                     elif code == 39:
-                        fg = "#e5e9eb"
+                        fg = default_fg
                     elif code == 49:
-                        bg = "#171a1d"
+                        bg = default_bg
                     i += 1
                 continue
             part = re.sub(r"[\x00-\x1f\x7f]", "", part)
@@ -111,7 +116,7 @@ def main():
             span_width = columns(part) * cell
             x, y = inset + column * cell, top + row * leading
             ink, paper = (bg, fg) if inverse else (fg, bg)
-            if paper != "#171a1d":
+            if paper != default_bg:
                 output.append(f'<rect x="{x:g}" y="{y - 17:g}" width="{span_width:g}" height="{leading:g}" fill="{paper}"/>')
             if part.strip():
                 output.append(f'<text x="{x:g}" y="{y:g}" fill="{ink}" font-weight="{700 if bold else 400}" opacity="{0.76 if dim else 1}" xml:space="preserve" textLength="{span_width:g}" lengthAdjust="spacingAndGlyphs">{html.escape(part)}</text>')
