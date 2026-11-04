@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1422.4" height="870" viewBox="0 0 1422.4 870">
+<title>Codex Changes — synthetic terminal demo</title>
+<desc>A file list on the left and the selected file’s chronological patches on the right. All data is synthetic.</desc>
+<rect width="1422.4" height="870" rx="10" fill="#171a1d"/>
+<g fill="#647178"><circle cx="22" cy="20" r="4"/><circle cx="38" cy="20" r="4"/><circle cx="54" cy="20" r="4"/></g>
+<text x="78" y="25" fill="#9ba5ac" font-family="monospace" font-size="13">codex-changes --demo</text>
+<g font-family="Menlo, DejaVu Sans Mono, Noto Sans Mono CJK SC, monospace" font-size="16">
+<text x="29.6" y="51" fill="#84cfc2" font-weight="700" opacity="1" xml:space="preserve" textLength="124.8" lengthAdjust="spacingAndGlyphs">CODEX CHANGES</text>
+<text x="173.6" y="51" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="144" lengthAdjust="spacingAndGlyphs">DEMO · 合成数据</text>
+<text x="1220" y="51" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="172.8" lengthAdjust="spacingAndGlyphs">s 切换会话  ? 帮助</text>
+<text x="29.6" y="74" fill="#e5e9eb" font-weight="700" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">相机拍摄笔记</text>
+<text x="164" y="74" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">/demo/camera</text>
+<text x="20" y="97" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="1382.4" lengthAdjust="spacingAndGlyphs">────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</text>
+<text x="20" y="120" fill="#84cfc2" font-weight="700" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">▸ 改动文件 4</text>
+<text x="365.6" y="120" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="375.2" y="120" fill="#e5e9eb" font-weight="700" opacity="1" xml:space="preserve" textLength="124.8" lengthAdjust="spacingAndGlyphs">  读出时间.md</text>
+<text x="500" y="120" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="835.2" lengthAdjust="spacingAndGlyphs">                                                                        2 次修改  累计 </text>
+<text x="1335.2" y="120" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">+13</text>
+<text x="1373.6" y="120" fill="#f0a3a3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−1</text>
+<text x="29.6" y="143" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="172.8" lengthAdjust="spacingAndGlyphs">/ 过滤文件名或路径</text>
+<text x="365.6" y="143" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="394.4" y="143" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="288" lengthAdjust="spacingAndGlyphs">/demo/camera/notes/读出时间.md</text>
+<text x="1287.2" y="143" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">单栏 · 换行</text>
+<text x="20" y="166" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="144" lengthAdjust="spacingAndGlyphs">  settings.json</text>
+<text x="317.6" y="166" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">2 次 </text>
+<text x="365.6" y="166" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="149" width="336" height="23" fill="#293c3c"/>
+<text x="375.2" y="166" fill="#84cfc2" font-weight="700" opacity="1" xml:space="preserve" textLength="336" lengthAdjust="spacingAndGlyphs"> ▾ 2026-11-01 16:30  修改 · 第 2 轮</text>
+<rect x="711.2" y="149" width="633.6" height="23" fill="#293c3c"/>
+<rect x="1344.8" y="149" width="19.2" height="23" fill="#293c3c"/>
+<text x="1344.8" y="166" fill="#9ad9ab" font-weight="700" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+6</text>
+<text x="1373.6" y="166" fill="#f0a3a3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−1</text>
+<text x="39.2" y="189" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">export</text>
+<text x="308" y="189" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+6</text>
+<text x="336.8" y="189" fill="#f0a3a3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−1</text>
+<text x="365.6" y="189" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="375.2" y="189" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="566.4" lengthAdjust="spacingAndGlyphs">  你说 · 把不同模式分开说明，并记录引用来源，方便以后复核。</text>
+<rect x="20" y="195" width="124.8" height="23" fill="#293c3c"/>
+<text x="20" y="212" fill="#e5e9eb" font-weight="700" opacity="1" xml:space="preserve" textLength="124.8" lengthAdjust="spacingAndGlyphs">› 读出时间.md</text>
+<rect x="144.8" y="195" width="172.8" height="23" fill="#293c3c"/>
+<rect x="317.6" y="195" width="48" height="23" fill="#293c3c"/>
+<text x="317.6" y="212" fill="#e5e9eb" font-weight="700" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">2 次 </text>
+<text x="365.6" y="212" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="375.2" y="212" fill="#84cfc2" font-weight="400" opacity="1" xml:space="preserve" textLength="172.8" lengthAdjust="spacingAndGlyphs">  @@ -1,7 +1,12 @@</text>
+<rect x="20" y="218" width="67.2" height="23" fill="#293c3c"/>
+<text x="20" y="235" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">  notes</text>
+<text x="298.4" y="235" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">+13</text>
+<text x="336.8" y="235" fill="#f0a3a3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−1</text>
+<text x="365.6" y="235" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="375.2" y="235" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">   1    1   </text>
+<text x="490.4" y="235" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs"># 读出时间</text>
+<text x="20" y="258" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">  measure.py</text>
+<text x="317.6" y="258" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">2 次 </text>
+<text x="365.6" y="258" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="375.2" y="258" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">   2    2   </text>
+<text x="39.2" y="281" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">scripts</text>
+<text x="308" y="281" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
+<text x="336.8" y="281" fill="#f0a3a3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−0</text>
+<text x="365.6" y="281" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="264" width="115.2" height="23" fill="#3b292c"/>
+<text x="375.2" y="281" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">   3      − </text>
+<rect x="490.4" y="264" width="288" height="23" fill="#3b292c"/>
+<text x="490.4" y="281" fill="#f0a3a3" font-weight="400" opacity="1" xml:space="preserve" textLength="288" lengthAdjust="spacingAndGlyphs">读出时间取决于画幅和采样模式。</text>
+<text x="20" y="304" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="144" lengthAdjust="spacingAndGlyphs">  old-notes.txt</text>
+<text x="317.6" y="304" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">1 次 </text>
+<text x="365.6" y="304" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="287" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="304" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">        3 + </text>
+<rect x="490.4" y="287" width="460.8" height="23" fill="#20352b"/>
+<text x="490.4" y="304" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="460.8" lengthAdjust="spacingAndGlyphs">读出时间需要结合画幅、分辨率和采样模式一起比较。</text>
+<text x="39.2" y="327" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="124.8" lengthAdjust="spacingAndGlyphs">/demo/scratch</text>
+<text x="308" y="327" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+0</text>
+<text x="336.8" y="327" fill="#f0a3a3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−2</text>
+<text x="365.6" y="327" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="310" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="327" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">        4 + </text>
+<rect x="490.4" y="310" width="422.4" height="23" fill="#20352b"/>
+<text x="490.4" y="327" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="422.4" lengthAdjust="spacingAndGlyphs">同一台相机的不同模式不能直接共用一个测量值。</text>
+<text x="365.6" y="350" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="375.2" y="350" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">   4    5   </text>
+<text x="365.6" y="373" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="375.2" y="373" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">   5    6   </text>
+<text x="490.4" y="373" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">## 测量方法</text>
+<text x="365.6" y="396" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="375.2" y="396" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">   6    7   </text>
+<text x="490.4" y="396" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="192" lengthAdjust="spacingAndGlyphs">使用稳定频率的光源。</text>
+<text x="365.6" y="419" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="375.2" y="419" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">   7    8   </text>
+<text x="490.4" y="419" fill="#e5e9eb" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">记录拍摄设置。</text>
+<text x="365.6" y="442" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="425" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="442" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">        9 + </text>
+<text x="365.6" y="465" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="448" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="465" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">       10 + </text>
+<rect x="490.4" y="448" width="105.6" height="23" fill="#20352b"/>
+<text x="490.4" y="465" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">## 引用来源</text>
+<text x="365.6" y="488" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="471" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="488" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">       11 + </text>
+<rect x="490.4" y="471" width="307.2" height="23" fill="#20352b"/>
+<text x="490.4" y="488" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="307.2" lengthAdjust="spacingAndGlyphs">每条数据保留来源链接和测量条件。</text>
+<text x="365.6" y="511" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="494" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="511" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">       12 + </text>
+<rect x="490.4" y="494" width="345.6" height="23" fill="#20352b"/>
+<text x="490.4" y="511" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="345.6" lengthAdjust="spacingAndGlyphs">缺少测量条件的数据单独标记为待核验。</text>
+<text x="365.6" y="534" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="365.6" y="557" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="540" width="336" height="23" fill="#293c3c"/>
+<text x="375.2" y="557" fill="#84cfc2" font-weight="700" opacity="1" xml:space="preserve" textLength="336" lengthAdjust="spacingAndGlyphs"> ▾ 2026-11-01 14:30  新建 · 第 1 轮</text>
+<rect x="711.2" y="540" width="633.6" height="23" fill="#293c3c"/>
+<rect x="1344.8" y="540" width="19.2" height="23" fill="#293c3c"/>
+<text x="1344.8" y="557" fill="#9ad9ab" font-weight="700" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+7</text>
+<text x="1373.6" y="557" fill="#f0a3a3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−0</text>
+<text x="365.6" y="580" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="375.2" y="580" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="412.8" lengthAdjust="spacingAndGlyphs">  你说 · 整理拍摄笔记，补上读出时间的说明。</text>
+<text x="365.6" y="603" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="586" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="603" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">        1 + </text>
+<rect x="490.4" y="586" width="96" height="23" fill="#20352b"/>
+<text x="490.4" y="603" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs"># 读出时间</text>
+<text x="365.6" y="626" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="609" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="626" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">        2 + </text>
+<text x="365.6" y="649" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="632" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="649" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">        3 + </text>
+<rect x="490.4" y="632" width="288" height="23" fill="#20352b"/>
+<text x="490.4" y="649" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="288" lengthAdjust="spacingAndGlyphs">读出时间取决于画幅和采样模式。</text>
+<text x="365.6" y="672" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="655" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="672" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">        4 + </text>
+<text x="365.6" y="695" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="678" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="695" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">        5 + </text>
+<rect x="490.4" y="678" width="105.6" height="23" fill="#20352b"/>
+<text x="490.4" y="695" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">## 测量方法</text>
+<text x="365.6" y="718" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="701" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="718" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">        6 + </text>
+<rect x="490.4" y="701" width="192" height="23" fill="#20352b"/>
+<text x="490.4" y="718" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="192" lengthAdjust="spacingAndGlyphs">使用稳定频率的光源。</text>
+<text x="365.6" y="741" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="375.2" y="724" width="115.2" height="23" fill="#20352b"/>
+<text x="375.2" y="741" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">        7 + </text>
+<rect x="490.4" y="724" width="134.4" height="23" fill="#20352b"/>
+<text x="490.4" y="741" fill="#9ad9ab" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">记录拍摄设置。</text>
+<text x="365.6" y="764" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="365.6" y="787" fill="#414950" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="29.6" y="810" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="451.2" lengthAdjust="spacingAndGlyphs">已读 3 轮 · 4 个文件 · 7 次修改 · 含 1 个子会话</text>
+<text x="20" y="833" fill="#9ba5ac" font-weight="400" opacity="1" xml:space="preserve" textLength="672" lengthAdjust="spacingAndGlyphs"> ↑↓ 移动  Tab 区域  / 筛文件  s 会话  [ ] 修改  v 并排  w 换行  t 主题</text>
+<text x="1258.4" y="833" fill="#84cfc2" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">? 帮助  q 退出</text>
+</g>
+</svg>
