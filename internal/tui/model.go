@@ -3,6 +3,7 @@ package tui
 import (
 	"context"
 	"fmt"
+	"os"
 	"strings"
 	"time"
 
@@ -13,14 +14,15 @@ import (
 )
 
 type Options struct {
-	Binary      string
-	Thread      string
-	File        string
-	Demo        bool
-	Children    bool
-	Archived    bool
-	Preferences preferences.State
-	StatePath   string
+	Binary           string
+	Thread           string
+	File             string
+	Demo             bool
+	Children         bool
+	Archived         bool
+	WorkingDirectory string
+	Preferences      preferences.State
+	StatePath        string
 }
 
 type model struct {
@@ -31,6 +33,7 @@ type model struct {
 	width, height                    int
 	dark                             bool
 	level                            navLevel
+	startupContextApplied            bool
 	projects                         []project
 	matchingProjects                 []int
 	projectQuery                     string
@@ -91,6 +94,9 @@ type scanMsg struct {
 type pulseMsg struct{}
 
 func Run(ctx context.Context, opts Options) error {
+	if opts.WorkingDirectory == "" {
+		opts.WorkingDirectory, _ = os.Getwd()
+	}
 	m := newModel(ctx, opts)
 	final, err := tea.NewProgram(m, tea.WithContext(ctx)).Run()
 	if m, ok := final.(*model); ok {
@@ -218,12 +224,8 @@ func (m *model) Update(message tea.Msg) (tea.Model, tea.Cmd) {
 			return m, nil
 		}
 		m.reader, m.client = msg.reader, msg.client
-		id := m.opts.Thread
-		if id == "" {
-			id = m.opts.Preferences.LastThread
-		}
-		if id != "" {
-			return m, tea.Batch(m.listCmd(), m.openThread(id, levelHunk))
+		if m.opts.Thread != "" {
+			return m, tea.Batch(m.listCmd(), m.openThread(m.opts.Thread, levelHunk))
 		}
 		return m, m.listCmd()
 	case threadsMsg:
@@ -234,6 +236,12 @@ func (m *model) Update(message tea.Msg) (tea.Model, tea.Cmd) {
 		}
 		m.threads = msg.threads
 		m.rebuildProjects()
+		if !m.startupContextApplied && m.opts.Thread == "" {
+			m.startupContextApplied = true
+			m.applyWorkingDirectory()
+			return m, m.previewSelectedThread()
+		}
+		m.startupContextApplied = true
 		id := m.session.Thread.ID
 		if id == "" {
 			id = m.opts.Preferences.LastThread
