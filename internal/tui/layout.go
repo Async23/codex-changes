@@ -73,15 +73,12 @@ func (m *model) fitColumns(columns []column) []column {
 		}
 	}
 	available := m.width - len(columns) + 1
-	total, receiver := 0, 0
-	for i, c := range columns {
+	total := 0
+	for _, c := range columns {
 		total += c.width
-		if c.diff || c.level == m.level {
-			receiver = i
-		}
 	}
 	// Share pressure across columns with spare width instead of assigning
-	// fixed percentages. An empty child stays compact even on a wide screen.
+	// fixed percentages.
 	for total > available {
 		widest, spare := -1, 0
 		for i, c := range columns {
@@ -95,6 +92,8 @@ func (m *model) fitColumns(columns []column) []column {
 		columns[widest].width--
 		total--
 	}
-	columns[receiver].width += available - total
+	// Like Yazi, fit the parent and current lists to their content and give
+	// all remaining space to the right preview, including directory previews.
+	columns[len(columns)-1].width += available - total
 	return columns
 }

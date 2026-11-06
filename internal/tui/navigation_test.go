@@ -171,8 +171,8 @@ func TestNavigationLayoutReducesRedundancy(t *testing.T) {
 	m := demoModel(t)
 	m.level, m.focusDiff = levelSession, false
 	columns := m.columns()
-	if len(columns) != 3 || columns[1].width <= columns[0].width || columns[1].width <= columns[2].width {
-		t.Fatalf("active column does not receive the most space: %+v", columns)
+	if len(columns) != 3 || columns[2].width <= columns[0].width || columns[2].width <= columns[1].width {
+		t.Fatalf("right preview does not receive the remaining space: %+v", columns)
 	}
 	text := ansi.Strip(m.render())
 	if strings.Contains(text, "Enter 进入下一层") {

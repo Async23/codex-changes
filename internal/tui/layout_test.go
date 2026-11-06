@@ -11,7 +11,7 @@ import (
 	"github.com/charmbracelet/x/ansi"
 )
 
-func TestContentWidthsFitLongNamesAndShrinkEmptyChildren(t *testing.T) {
+func TestContentWidthsFitLongNamesAndLeaveSpaceForEmptyPreview(t *testing.T) {
 	m := demoModel(t)
 	m.width = 200
 	m.level, m.focusDiff = levelSession, false
@@ -21,8 +21,8 @@ func TestContentWidthsFitLongNamesAndShrinkEmptyChildren(t *testing.T) {
 	m.directories, m.matchingDirectories = nil, nil
 	m.files, m.matchingEdits, m.matchingHunks, m.hunks = nil, nil, nil, nil
 	columns := m.columns()
-	if len(columns) != 3 || columns[0].width <= 30 || columns[2].width > 24 {
-		t.Fatalf("long parent or empty child still has a fixed width: %+v", columns)
+	if len(columns) != 3 || columns[0].width <= 30 || columns[1].width > 40 || columns[2].width <= columns[1].width {
+		t.Fatalf("long parent or compact current list does not leave room for the preview: %+v", columns)
 	}
 	row := ansi.Strip(m.navigationItem(levelProject, 0, columns[0].width))
 	if !strings.Contains(row, name) || strings.Contains(row, "…") || !strings.Contains(row, " 会话") {
@@ -56,6 +56,30 @@ func TestColumnWidthFollowsVisibleRows(t *testing.T) {
 	after := m.columns()[0].width
 	if after <= before || after < 57 {
 		t.Fatalf("visible long row did not expand the column: %d -> %d", before, after)
+	}
+}
+
+func TestBrowsingColumnsKeepContentWidthWhenWindowGrows(t *testing.T) {
+	for _, level := range []navLevel{levelProject, levelSession, levelDirectory, levelFile, levelEdit} {
+		t.Run(levelKey(level), func(t *testing.T) {
+			m := demoModel(t)
+			m.level, m.focusDiff = level, false
+			m.width = 158
+			before := m.columns()
+			m.width = 220
+			after := m.columns()
+			if len(before) != len(after) {
+				t.Fatalf("unexpected column count change: %v -> %v", before, after)
+			}
+			for i := 0; i < len(before)-1; i++ {
+				if after[i].width != before[i].width {
+					t.Fatalf("%s column stretched for unchanged content: %d -> %d", levelKey(after[i].level), before[i].width, after[i].width)
+				}
+			}
+			if got := after[len(after)-1].width - before[len(before)-1].width; got != 62 {
+				t.Fatalf("right preview did not receive the 62 extra cells: %d", got)
+			}
+		})
 	}
 }
 
