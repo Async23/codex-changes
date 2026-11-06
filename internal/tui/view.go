@@ -16,6 +16,7 @@ import (
 type palette struct {
 	bg, fg, muted, border, accent, selected, add, remove, addBG, removeBG color.Color
 	addWord, removeWord                                                   color.Color
+	menuBG, menuDesc                                                      color.Color
 	syntax                                                                [highlight.RoleCount]color.Color
 }
 
@@ -28,12 +29,14 @@ func (m *model) palette() palette {
 	if dark {
 		return palette{
 			bg: c("#171a1d"), fg: c("#e5e9eb"), muted: c("#9ba5ac"), border: c("#414950"), accent: c("#84cfc2"), selected: c("#293c3c"),
+			menuBG: c("#242a30"), menuDesc: c("#e6c384"),
 			add: c("#72ce88"), remove: c("#e88383"), addBG: c("#123019"), removeBG: c("#401b20"), addWord: c("#245c30"), removeWord: c("#753038"),
 			syntax: [highlight.RoleCount]color.Color{c("#f8f8f2"), c("#f92672"), c("#66d9ef"), c("#e6db74"), c("#be84ff"), c("#a0a194"), c("#a6e22e"), c("#a6e22e"), c("#f92672"), c("#f92672"), c("#66d9ef")},
 		}
 	}
 	return palette{
 		bg: c("#faf4ed"), fg: c("#333333"), muted: c("#7c817a"), border: c("#d6d1c9"), accent: c("#087568"), selected: c("#e3eee7"),
+		menuBG: c("#fffaf3"), menuDesc: c("#9a6700"),
 		add: c("#248a3d"), remove: c("#cf222e"), addBG: c("#dcffdc"), removeBG: c("#ffdcdc"), addWord: c("#b2ffb2"), removeWord: c("#ffc7c7"),
 		syntax: [highlight.RoleCount]color.Color{c("#333333"), c("#a71d5d"), c("#a71d5d"), c("#183691"), c("#0086b3"), c("#7c817a"), c("#795da3"), c("#0086b3"), c("#333333"), c("#a71d5d"), c("#0086b3")},
 	}

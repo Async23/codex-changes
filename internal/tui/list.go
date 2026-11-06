@@ -143,38 +143,6 @@ func (m *model) listMenuKey(key string) {
 	}
 }
 
-func (m *model) listMenuRows() []string {
-	p := m.palette()
-	pref := m.listPreference(m.level)
-	options, selected := sortOptions(m.level), pref.Sort
-	title, hint := "排序", "小写升序 / 大写降序 · Esc 取消"
-	if m.listMenu == "m" {
-		options, selected = linemodeOptions(m.level), pref.Linemode
-		title, hint = "行信息", "按对应字母选择 · Esc 取消"
-	}
-	rows := []string{style(p.accent).Bold(true).Background(p.selected).Render(fit(" "+title+" · "+levelTitle(m.level), m.width))}
-	for _, option := range options {
-		key := option.key
-		if m.listMenu == "," && option.value != "" {
-			key += "/" + strings.ToUpper(key)
-		}
-		mark := " "
-		if option.value == selected {
-			mark = "›"
-		}
-		label := option.label
-		if m.listMenu == "," && option.value == selected && selected != "" {
-			if pref.Reverse {
-				label += " ↓"
-			} else {
-				label += " ↑"
-			}
-		}
-		rows = append(rows, fmt.Sprintf(" %s %-3s  %s", mark, key, label))
-	}
-	return append(rows, style(p.muted).Render(" "+hint))
-}
-
 // A listEntry describes history metadata only; no current filesystem reads.
 // Rendering, width measurement and sorting all use the same fields.
 type listEntry struct {

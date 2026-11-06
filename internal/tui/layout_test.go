@@ -111,7 +111,7 @@ func TestAdaptiveListsAndMenusStayInsideTerminal(t *testing.T) {
 				for _, prefix := range []rune{',', 'm'} {
 					typeKey(m, prefix)
 					rows := strings.Split(m.render(), "\n")
-					if len(rows) != height || !strings.Contains(ansi.Strip(rows[height-1]), "Esc") {
+					if len(rows) != height || !strings.Contains(ansi.Strip(rows[height-2]), "Esc") {
 						t.Fatalf("menu footer is inaccessible at %dx%d", width, height)
 					}
 					for _, row := range rows {
