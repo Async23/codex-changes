@@ -26,12 +26,15 @@ type project struct {
 	Name      string
 	Sessions  int
 	UpdatedAt int64
+	CreatedAt int64
 }
 
 type directory struct {
-	Path  string
-	Label string
-	Files int
+	Path                 string
+	Label                string
+	Files                int
+	Added, Removed       int
+	UpdatedAt, CreatedAt int64
 }
 
 type editHunk struct {
@@ -69,6 +72,7 @@ func (m *model) rebuildProjects() {
 		}
 		p.Sessions++
 		p.UpdatedAt = max(p.UpdatedAt, thread.UpdatedAt)
+		p.CreatedAt = firstTime(p.CreatedAt, thread.CreatedAt)
 	}
 	m.projects = m.projects[:0]
 	for _, p := range byPath {
@@ -96,6 +100,7 @@ func (m *model) filterProjects(preferred string) {
 			m.matchingProjects = append(m.matchingProjects, i)
 		}
 	}
+	m.sortMatches(levelProject, m.matchingProjects)
 	m.projectCursor = 0
 	for i, index := range m.matchingProjects {
 		if m.projects[index].Path == preferred {
@@ -153,6 +158,7 @@ func (m *model) filterThreads() {
 			m.matchingThreads = append(m.matchingThreads, i)
 		}
 	}
+	m.sortMatches(levelSession, m.matchingThreads)
 	m.pickerCursor = 0
 	for i, index := range m.matchingThreads {
 		if m.threads[index].ID == selected {
@@ -210,13 +216,18 @@ func (m *model) rebuildDirectories(preferredFile string) {
 	byPath := make(map[string]*directory)
 	for _, file := range m.session.Files {
 		d := m.directoryForPath(file.Path)
-		if existing := byPath[d.Path]; existing != nil {
-			existing.Files++
-			continue
+		existing := byPath[d.Path]
+		if existing == nil {
+			copy := d
+			existing = &copy
+			byPath[d.Path] = existing
 		}
-		copy := d
-		copy.Files = 1
-		byPath[d.Path] = &copy
+		existing.Files++
+		existing.Added += file.Added
+		existing.Removed += file.Removed
+		first, last := fileTimes(file)
+		existing.CreatedAt = firstTime(existing.CreatedAt, first)
+		existing.UpdatedAt = max(existing.UpdatedAt, last)
 	}
 	m.directories = m.directories[:0]
 	for _, d := range byPath {
@@ -247,6 +258,7 @@ func (m *model) filterDirectories(preferred string) {
 			m.matchingDirectories = append(m.matchingDirectories, i)
 		}
 	}
+	m.sortMatches(levelDirectory, m.matchingDirectories)
 	m.directoryCursor = 0
 	for i, index := range m.matchingDirectories {
 		if m.directories[index].Path == preferred {
@@ -276,6 +288,7 @@ func (m *model) filterFiles(preferred string) {
 			m.files = append(m.files, i)
 		}
 	}
+	m.sortMatches(levelFile, m.files)
 	m.fileCursor = 0
 	m.selectFilteredFile(preferred)
 	if previous != m.selectedPath() {
@@ -365,6 +378,7 @@ func (m *model) filterEdits() {
 			}
 		}
 	}
+	m.sortMatches(levelEdit, m.matchingEdits)
 	m.editCursor = 0
 	for i, index := range m.matchingEdits {
 		if file.Edits[index].ID == previous {
@@ -443,7 +457,7 @@ func buildEditHunks(edit *changes.Edit) []editHunk {
 func (m *model) filterHunks(preferred string) {
 	if preferred == "" {
 		if h := m.selectedHunk(); h != nil {
-			preferred = h.Title
+			preferred = hunkIdentity(h)
 		}
 	}
 	m.matchingHunks = nil
@@ -453,9 +467,10 @@ func (m *model) filterHunks(preferred string) {
 			m.matchingHunks = append(m.matchingHunks, i)
 		}
 	}
+	m.sortMatches(levelHunk, m.matchingHunks)
 	m.hunkCursor = 0
 	for i, index := range m.matchingHunks {
-		if m.hunks[index].Title == preferred {
+		if hunkIdentity(&m.hunks[index]) == preferred {
 			m.hunkCursor = i
 			break
 		}
@@ -472,7 +487,7 @@ func (m *model) refreshHunks() {
 	previous := ""
 	if m.hunksEditID == edit.ID {
 		if h := m.selectedHunk(); h != nil {
-			previous = h.Title
+			previous = hunkIdentity(h)
 		}
 	}
 	m.hunks = buildEditHunks(edit)

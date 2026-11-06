@@ -1,0 +1,121 @@
+package tui
+
+import (
+	"fmt"
+	"strings"
+	"testing"
+
+	tea "charm.land/bubbletea/v2"
+	"github.com/Async23/codex-changes/internal/changes"
+	"github.com/Async23/codex-changes/internal/codex"
+	"github.com/charmbracelet/x/ansi"
+)
+
+func TestContentWidthsFitLongNamesAndShrinkEmptyChildren(t *testing.T) {
+	m := demoModel(t)
+	m.width = 200
+	m.level, m.focusDiff = levelSession, false
+	name := "中文-project-with-a-long-descriptive-name"
+	m.projects[m.matchingProjects[0]].Name = name
+	m.session = changes.Session{Thread: codex.Thread{ID: m.selectedThreadID()}}
+	m.directories, m.matchingDirectories = nil, nil
+	m.files, m.matchingEdits, m.matchingHunks, m.hunks = nil, nil, nil, nil
+	columns := m.columns()
+	if len(columns) != 3 || columns[0].width <= 30 || columns[2].width > 24 {
+		t.Fatalf("long parent or empty child still has a fixed width: %+v", columns)
+	}
+	row := ansi.Strip(m.navigationItem(levelProject, 0, columns[0].width))
+	if !strings.Contains(row, name) || strings.Contains(row, "…") || !strings.Contains(row, " 会话") {
+		t.Fatalf("project name or metadata was clipped despite available space: %q", row)
+	}
+	m.level = levelProject
+	chooseListOption(m, 'm', 'n')
+	m.level = levelSession
+	if hidden := m.columns()[0].width; hidden >= columns[0].width {
+		t.Fatalf("hiding metadata did not reclaim width: %d >= %d", hidden, columns[0].width)
+	}
+}
+
+func TestColumnWidthFollowsVisibleRows(t *testing.T) {
+	m := demoModel(t)
+	m.width, m.height = 200, 10
+	m.level, m.focusDiff = levelSession, false
+	m.projects = nil
+	m.matchingProjects = nil
+	for i := 0; i < 8; i++ {
+		name := "short"
+		if i == 7 {
+			name = strings.Repeat("长", 25)
+		}
+		m.projects = append(m.projects, project{Name: name, Path: fmt.Sprint(i), Sessions: 1})
+		m.matchingProjects = append(m.matchingProjects, i)
+	}
+	before := m.columns()[0].width
+	m.projectCursor = 7
+	m.clamp()
+	after := m.columns()[0].width
+	if after <= before || after < 57 {
+		t.Fatalf("visible long row did not expand the column: %d -> %d", before, after)
+	}
+}
+
+func TestAdaptiveListsAndMenusStayInsideTerminal(t *testing.T) {
+	for _, width := range []int{40, 64, 89, 90, 100, 158, 240} {
+		for _, height := range []int{10, 24} {
+			m := demoModel(t)
+			m.width, m.height = width, height
+			for level := levelProject; level <= levelHunk; level++ {
+				m.level, m.focusDiff = level, false
+				m.rebuildDiff()
+				columns, total := m.columns(), 0
+				for _, column := range columns {
+					total += column.width
+					if column.width < 1 {
+						t.Fatalf("negative column at %dx%d: %+v", width, height, columns)
+					}
+					if !column.diff {
+						for _, row := range m.navigationRows(column.level, column.width) {
+							if ansi.StringWidth(row) != column.width {
+								t.Fatalf("list row overflows before frame clipping: %q", ansi.Strip(row))
+							}
+						}
+					}
+				}
+				if total+len(columns)-1 != width {
+					t.Fatalf("columns do not fill %d: %+v", width, columns)
+				}
+				for _, prefix := range []rune{',', 'm'} {
+					typeKey(m, prefix)
+					rows := strings.Split(m.render(), "\n")
+					if len(rows) != height || !strings.Contains(ansi.Strip(rows[height-1]), "Esc") {
+						t.Fatalf("menu footer is inaccessible at %dx%d", width, height)
+					}
+					for _, row := range rows {
+						if ansi.StringWidth(row) != width {
+							t.Fatalf("menu row overflow: %q", ansi.Strip(row))
+						}
+					}
+					m.key(tea.KeyPressMsg{Code: tea.KeyEscape})
+				}
+			}
+		}
+	}
+}
+
+func TestMetadataReflowsDiffAndKeepsReadingPosition(t *testing.T) {
+	m := demoModel(t)
+	m.height = 12
+	m.continuous, m.level, m.focusDiff = true, levelFile, false
+	m.rebuildDiff()
+	typeKey(m, 'J')
+	before, offset := m.diffWidth(), m.diffOffset
+	chooseListOption(m, 'm', 'n')
+	if m.diffWidth() <= before || m.diffOffset != offset {
+		t.Fatalf("metadata change did not reflow or reset reading position: width %d -> %d, offset %d -> %d", before, m.diffWidth(), offset, m.diffOffset)
+	}
+	for _, row := range m.rows {
+		if ansi.StringWidth(row.text) > m.diffWidth() {
+			t.Fatal("diff retained its old width after the list changed")
+		}
+	}
+}

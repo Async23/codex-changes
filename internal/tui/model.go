@@ -50,6 +50,7 @@ type model struct {
 	files                            []int
 	fileQuery                        string
 	filtering                        bool
+	listMenu                         string
 	fileCursor, fileOffset           int
 	matchingEdits                    []int
 	editQuery                        string
@@ -342,6 +343,10 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 	if m.filtering {
 		return m.filterKey(msg)
 	}
+	if m.listMenu != "" {
+		m.listMenuKey(key)
+		return nil
+	}
 	if key == "q" {
 		return tea.Quit
 	}
@@ -350,6 +355,10 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 		return nil
 	}
 	switch key {
+	case ",", "m":
+		if !m.focusDiff {
+			m.listMenu = key
+		}
 	case "s":
 		return m.showSessionPicker()
 	case "ctrl+r":
@@ -717,8 +726,8 @@ func (m *model) toggleContinuous() {
 		m.level, m.focusDiff = levelHunk, true
 	}
 	m.rebuildDiff()
-	if m.continuous && m.editCursor >= 0 && m.editCursor < len(m.anchors) {
-		m.diffOffset = m.anchors[m.editCursor]
+	if m.continuous && m.editCursor >= 0 && m.editCursor < len(m.matchingEdits) {
+		m.diffOffset = m.anchors[m.matchingEdits[m.editCursor]]
 		m.clamp()
 	}
 }
@@ -869,7 +878,7 @@ func (m *model) showSessionPicker() tea.Cmd {
 }
 
 func (m *model) click(mouse tea.Mouse) tea.Cmd {
-	if mouse.Button != tea.MouseLeft || m.help {
+	if mouse.Button != tea.MouseLeft || m.help || m.listMenu != "" {
 		return nil
 	}
 	if mouse.Y <= 1 {
@@ -905,7 +914,7 @@ func (m *model) click(mouse tea.Mouse) tea.Cmd {
 }
 
 func (m *model) wheel(mouse tea.Mouse) tea.Cmd {
-	if m.help {
+	if m.help || m.listMenu != "" {
 		return nil
 	}
 	delta := 3

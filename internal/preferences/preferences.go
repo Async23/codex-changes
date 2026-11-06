@@ -9,11 +9,19 @@ import (
 
 // Only UI preferences and the last selection are saved; never history bodies.
 type State struct {
-	Theme      string `json:"theme"`
-	Wrap       bool   `json:"wrap"`
-	Split      bool   `json:"split"`
-	LastThread string `json:"lastThread,omitempty"`
-	LastFile   string `json:"lastFile,omitempty"`
+	Theme      string          `json:"theme"`
+	Wrap       bool            `json:"wrap"`
+	Split      bool            `json:"split"`
+	LastThread string          `json:"lastThread,omitempty"`
+	LastFile   string          `json:"lastFile,omitempty"`
+	Lists      map[string]List `json:"lists,omitempty"`
+}
+
+// List stores independent choices for each navigation level.
+type List struct {
+	Sort     string `json:"sort,omitempty"`
+	Reverse  bool   `json:"reverse,omitempty"`
+	Linemode string `json:"linemode,omitempty"`
 }
 
 func Defaults() State { return State{Theme: "auto", Wrap: true} }

@@ -17,6 +17,7 @@ type displayRow struct {
 }
 
 func (m *model) rebuildDiff() {
+	offset := m.diffOffset
 	m.rows, m.anchors = nil, nil
 	m.filterEdits()
 	m.refreshHunks()
@@ -25,18 +26,20 @@ func (m *model) rebuildDiff() {
 		m.diffOffset = 0
 		return
 	}
+	width := m.diffWidth()
 	if m.continuous {
 		for i := range file.Edits {
-			m.appendEdit(file, &file.Edits[i], nil)
+			m.appendEdit(file, &file.Edits[i], nil, width)
 		}
 	} else if edit := m.selectedEdit(); edit != nil {
-		m.appendEdit(file, edit, m.selectedHunk())
+		m.appendEdit(file, edit, m.selectedHunk(), width)
 	}
+	m.diffOffset = offset
 	m.clamp()
 }
 
-func (m *model) appendEdit(file *changes.File, edit *changes.Edit, hunk *editHunk) {
-	p, width := m.palette(), m.diffWidth()
+func (m *model) appendEdit(file *changes.File, edit *changes.Edit, hunk *editHunk, width int) {
+	p := m.palette()
 	if len(m.rows) > 0 {
 		m.rows = append(m.rows, displayRow{editID: edit.ID})
 	}
@@ -176,7 +179,8 @@ func (m *model) maxColumn() int {
 	if file == nil {
 		return 0
 	}
-	width := m.diffWidth()
+	fullWidth := m.diffWidth()
+	width := fullWidth
 	if m.opts.Preferences.Split && width >= 60 {
 		width = (width - 1) / 2
 	}
@@ -189,7 +193,7 @@ func (m *model) maxColumn() int {
 		for _, line := range lines {
 			available := width - digits - 4
 			if line.Kind == changes.Hunk || line.Kind == changes.Metadata {
-				available = m.diffWidth() - 2
+				available = fullWidth - 2
 			}
 			maximum = max(maximum, ansi.StringWidth(strings.ReplaceAll(line.Text, "\t", "    "))-available)
 		}

@@ -5,7 +5,6 @@ import (
 	"image/color"
 	"path/filepath"
 	"strings"
-	"time"
 
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
@@ -56,10 +55,10 @@ func cut(value string, width int) string {
 	return value + strings.Repeat(" ", max(0, width-ansi.StringWidth(value)))
 }
 func between(left, right string, width int) string {
-	if ansi.StringWidth(right)+2 >= width {
+	if right == "" || ansi.StringWidth(right)+4 >= width {
 		return fit(left, width)
 	}
-	return fit(left, width-ansi.StringWidth(right)) + right
+	return fit(left, width-ansi.StringWidth(right)-1) + " " + right
 }
 func clean(value string) string { return changes.OneLine(value) }
 
@@ -83,6 +82,11 @@ func (m *model) render() string {
 		rows = m.helpRows()
 	} else {
 		rows = m.mainRows()
+	}
+	if m.listMenu != "" {
+		menu := m.listMenuRows()
+		start := max(0, h-len(menu))
+		rows = append(rows[:min(start, len(rows))], menu...)
 	}
 	for len(rows) < h {
 		rows = append(rows, "")
@@ -114,49 +118,6 @@ type column struct {
 
 func navColumn(level navLevel) column { return column{level: level} }
 func diffColumn() column              { return column{diff: true} }
-
-func columnMinimum(c column) int {
-	if c.diff {
-		return 50
-	}
-	switch c.level {
-	case levelFile, levelSession:
-		return 26
-	case levelEdit:
-		return 30
-	default:
-		return 20
-	}
-}
-
-func columnDesired(c column) int {
-	if c.diff {
-		return 72
-	}
-	switch c.level {
-	case levelProject, levelDirectory:
-		return 26
-	case levelSession, levelFile:
-		return 34
-	case levelEdit:
-		return 38
-	case levelHunk:
-		return 34
-	}
-	return 30
-}
-
-func columnsWidth(columns []column, desired bool) int {
-	total := len(columns) - 1
-	for _, c := range columns {
-		if desired {
-			total += columnDesired(c)
-		} else {
-			total += columnMinimum(c)
-		}
-	}
-	return total
-}
 
 func (m *model) columns() []column {
 	if m.hideFiles {
@@ -197,41 +158,7 @@ func (m *model) columns() []column {
 			}
 		}
 	}
-	hasDiff := columns[len(columns)-1].diff
-	if hasDiff {
-		for len(columns) > 2 && columnsWidth(columns, true) > m.width {
-			columns = columns[1:]
-		}
-		remaining := m.width - (len(columns) - 1)
-		if len(columns) == 1 {
-			columns[0].width = remaining
-			return columns
-		}
-		navigationWidth := 0
-		for i := 0; i < len(columns)-1; i++ {
-			columns[i].width = columnDesired(columns[i])
-			navigationWidth += columns[i].width
-		}
-		if len(columns) == 2 {
-			navigationWidth = min(columnDesired(columns[0]), max(columnMinimum(columns[0]), m.width/3))
-			columns[0].width = navigationWidth
-		}
-		columns[len(columns)-1].width = max(1, remaining-navigationWidth)
-		return columns
-	}
-	remaining := m.width - (len(columns) - 1)
-	if len(columns) == 2 {
-		columns[0].width = min(44, max(26, remaining/3))
-		columns[1].width = remaining - columns[0].width
-		return columns
-	}
-	// Parent and child lists provide context; the active column gets the space.
-	parent := min(30, max(20, remaining/5))
-	child := min(36, max(24, remaining/4))
-	columns[0].width = parent
-	columns[1].width = remaining - parent - child
-	columns[2].width = child
-	return columns
+	return m.fitColumns(columns)
 }
 
 func (m *model) columnAt(x int) *column {
@@ -307,14 +234,17 @@ func (m *model) mainRows() []string {
 	if m.continuous {
 		toggle = "c 单块"
 	}
-	hints := " j/k 选择  h/l 层级  / 筛选  J/K 预览  " + toggle
+	hints := " j/k 选择  h/l 层级  / 筛选  , 排序  m 信息  J/K 预览  " + toggle
 	if m.level <= levelSession {
-		hints = " j/k 选择  h/l 层级  / 筛选  Enter 打开"
+		hints = " j/k 选择  h/l 层级  / 筛选  , 排序  m 信息  Enter 打开"
 	} else if m.focusDiff {
 		hints = " j/k 滚动  h 返回  [ ] 修改  " + toggle + "  v 并排  w 换行"
 	}
 	if m.narrow() {
-		hints = " j/k 移动  l 进入  h 返回  s 会话  " + toggle
+		hints = " j/k 移动  h/l 层级  , 排序  m 信息"
+		if m.focusDiff {
+			hints = " j/k 滚动  h 返回  " + toggle
+		}
 	}
 	rows = append(rows, between(style(p.muted).Render(hints), style(p.accent).Render("? 帮助  q 退出 "), m.width))
 	return rows
@@ -382,16 +312,17 @@ func (m *model) navigationRows(level navLevel, width int) []string {
 		focus = "▸"
 	}
 	count := m.navigationCount(level)
-	unavailable := level >= levelDirectory && m.session.Thread.ID == ""
-	if level == levelDirectory && m.level == levelSession && m.selectedThreadID() != m.session.Thread.ID {
-		unavailable = true
-	}
+	unavailable := m.listUnavailable(level)
 	if unavailable {
 		count = 0
 	}
-	header := style(p.muted).Render(fmt.Sprintf("%s %s %d", focus, levelTitle(level), count))
+	heading := m.listHeading(level)
+	if unavailable {
+		heading = levelTitle(level) + " 0"
+	}
+	header := style(p.muted).Render(focus + " " + heading)
 	if focused {
-		header = style(p.accent).Bold(true).Render(fmt.Sprintf("%s %s %d", focus, levelTitle(level), count))
+		header = style(p.accent).Bold(true).Render(focus + " " + heading)
 	}
 	rows := []string{fit(header, width)}
 	hint := ""
@@ -417,15 +348,10 @@ func (m *model) navigationRows(level navLevel, width int) []string {
 		}
 	}
 	if count == 0 {
-		message := "没有可显示的项目"
-		if m.listLoading || m.loading {
-			message = "正在读取…"
-		} else if unavailable {
-			message = "选择会话后自动读取"
-		} else if m.currentQueryFor(level) != "" {
-			message = "当前栏没有匹配项"
+		message := m.emptyListMessage(level)
+		for _, line := range strings.Split(ansi.Hardwrap(message, max(1, width-4), true), "\n") {
+			rows = append(rows, fit("  "+style(p.muted).Render(line), width))
 		}
-		rows = append(rows, fit("  "+style(p.muted).Render(message), width))
 	}
 	for len(rows) < m.bodyHeight() {
 		rows = append(rows, strings.Repeat(" ", width))
@@ -434,45 +360,12 @@ func (m *model) navigationRows(level navLevel, width int) []string {
 }
 
 func (m *model) navigationItem(level navLevel, index, width int) string {
-	p := m.palette()
 	mark := "  "
 	if index == m.navigationCursor(level) {
 		mark = "› "
 	}
-	switch level {
-	case levelProject:
-		item := m.projects[m.matchingProjects[index]]
-		return between(mark+clean(item.Name), style(p.muted).Render(fmt.Sprintf("%d 会话 ", item.Sessions)), width)
-	case levelSession:
-		thread := m.threads[m.matchingThreads[index]]
-		title := clean(thread.Title())
-		if thread.Archived {
-			title += " [已归档]"
-		}
-		date := time.Unix(thread.UpdatedAt, 0).Local().Format("01-02 15:04") + " "
-		return between(mark+title, style(p.muted).Render(date), width)
-	case levelDirectory:
-		item := m.directories[m.matchingDirectories[index]]
-		return between(mark+clean(item.Label), style(p.muted).Render(fmt.Sprintf("%d 文件 ", item.Files)), width)
-	case levelFile:
-		file := m.session.Files[m.files[index]]
-		right := style(p.muted).Render(fmt.Sprintf("%d 次  ", len(file.Edits))) + style(p.add).Render(fmt.Sprintf("+%d", file.Added)) + " " + style(p.remove).Render(fmt.Sprintf("−%d", file.Removed)) + " "
-		return between(mark+clean(filepath.Base(file.Path)), right, width)
-	case levelEdit:
-		edit := m.selectedFile().Edits[m.matchingEdits[index]]
-		stamp := "时间未记录"
-		if edit.Time != 0 {
-			stamp = time.Unix(edit.Time, 0).Local().Format("01-02 15:04")
-		}
-		label := fmt.Sprintf("%s%s  %s · 第 %d 轮", mark, stamp, editKind(edit), edit.TurnNumber)
-		stats := style(p.add).Render(fmt.Sprintf("+%d", edit.Added)) + " " + style(p.remove).Render(fmt.Sprintf("−%d", edit.Removed)) + " "
-		return between(label, stats, width)
-	case levelHunk:
-		h := m.hunks[m.matchingHunks[index]]
-		stats := style(p.add).Render(fmt.Sprintf("+%d", h.Added)) + " " + style(p.remove).Render(fmt.Sprintf("−%d", h.Removed)) + " "
-		return between(mark+fmt.Sprintf("差异块 %d", m.matchingHunks[index]+1), stats, width)
-	}
-	return ""
+	name, info := m.navigationParts(level, index)
+	return between(mark+name, info, max(0, width-1)) + strings.Repeat(" ", min(1, width))
 }
 
 func editKind(edit changes.Edit) string {
@@ -552,11 +445,13 @@ func (m *model) helpRows() []string {
 	rows := []string{m.brandRow(), "",
 		"  层级导航", "",
 		"  项目 → 会话 → 目录 → 文件 → 修改记录 → 差异块；右侧显示所选 diff。",
-		"  同屏最多三栏，空间不足时收起左侧层级。",
+		"  列宽按可见名称和行信息调整；空间不足时收起左侧层级。",
 		"  ← → / h l  返回或进入层级     Enter  展开；在差异中进入阅读",
 		"  ↑↓ / j k   选择或滚动         Tab / Shift+Tab  切换可见区域",
 		"  鼠标点击选择；滚轮滚动鼠标所在区域。",
 		"  / 或 f     筛选当前栏；Enter 接受，Esc 清除；Ctrl+R 刷新列表",
+		"  ,          当前栏排序；小写升序、大写降序，d 恢复默认",
+		"  m          切换行信息；a 默认、n 隐藏；菜单按当前层级提供选项",
 		"  c          单块 / 连续时间线    [ / ]  上一条 / 下一条修改",
 		"  Space      连续模式中折叠或展开当前修改",
 		"  v          单栏 / 并排          w  自动换行 / 横向滚动",
