@@ -8,8 +8,63 @@ import (
 	tea "charm.land/bubbletea/v2"
 	"github.com/Async23/codex-changes/internal/changes"
 	"github.com/Async23/codex-changes/internal/codex"
+	"github.com/Async23/codex-changes/internal/preferences"
 	"github.com/charmbracelet/x/ansi"
 )
+
+func TestPreviewContentDoesNotResizeBrowsingColumns(t *testing.T) {
+	// Measured in Yazi 26.9.1 with the local mobile-auto-layout plugin:
+	// 90 -> 52/37/1, 100 -> 52/47/1, 158 -> 52/80/26, 220 -> 52/80/88.
+	// Our frame has two separate border cells, leaving two fewer content cells.
+	for _, tc := range []struct {
+		width int
+		want  [3]int
+	}{{90, [3]int{52, 35, 1}}, {100, [3]int{52, 45, 1}}, {158, [3]int{52, 80, 24}}, {220, [3]int{52, 80, 86}}} {
+		t.Run(fmt.Sprint(tc.width), func(t *testing.T) {
+			m := demoModel(t)
+			m.width, m.level, m.focusDiff = tc.width, levelSession, false
+			m.projects = []project{{Name: strings.Repeat("p", 41), Sessions: 1}}
+			m.matchingProjects, m.projectCursor, m.projectOffset = []int{0}, 0, 0
+			m.threads = []codex.Thread{{ID: "synthetic-width", Name: strings.Repeat("s", 90)}}
+			m.matchingThreads, m.pickerCursor, m.pickerOffset = []int{0}, 0, 0
+			m.opts.Preferences.Lists = map[string]preferences.List{"session": {Linemode: "none"}}
+			m.session = changes.Session{Thread: m.threads[0]}
+			m.directoryCursor, m.directoryOffset = 0, 0
+			m.directories, m.matchingDirectories = nil, nil
+			before := m.columns()
+			if len(before) != len(tc.want) {
+				t.Fatalf("unexpected column count: %+v", before)
+			}
+			for i, want := range tc.want {
+				if before[i].width != want {
+					t.Fatalf("widths differ from the measured Yazi allocation: %+v, want %v", before, tc.want)
+				}
+			}
+			for _, name := range []string{"short", strings.Repeat("long-directory-", 12), ""} {
+				m.directories, m.matchingDirectories = nil, nil
+				if name != "" {
+					m.directories = []directory{{Label: name, Files: 1}}
+					m.matchingDirectories = []int{0}
+				}
+				after := m.columns()
+				if len(after) != 3 {
+					t.Fatalf("preview change removed a browsing column: %+v", after)
+				}
+				for i := range before {
+					if after[i].width != before[i].width {
+						t.Fatalf("preview change resized unchanged browsing content: %+v -> %+v", before, after)
+					}
+				}
+			}
+			m.session.Thread.ID = ""
+			for i, c := range m.columns() {
+				if c.width != tc.want[i] {
+					t.Fatalf("unavailable preview changed column widths: %+v", m.columns())
+				}
+			}
+		})
+	}
+}
 
 func TestContentWidthsFitLongNamesAndLeaveSpaceForEmptyPreview(t *testing.T) {
 	m := demoModel(t)

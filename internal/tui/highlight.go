@@ -87,6 +87,16 @@ func layoutSpans(spans []highlight.Span, width int, wrap bool, column int) [][]h
 	return rows
 }
 
+func codeGutterWidth(width, digits int) int {
+	if width > digits+4 {
+		return digits + 4 // left margin, number, space, marker, space
+	}
+	if width >= 3 {
+		return 2 // Keep the change marker and at least one content cell.
+	}
+	return 0
+}
+
 func (m *model) codeRows(line *highlight.Line, width, digits int, left bool) []string {
 	if line == nil {
 		return []string{strings.Repeat(" ", width)}
@@ -102,13 +112,18 @@ func (m *model) codeRows(line *highlight.Line, width, digits int, left bool) []s
 	case changes.Removed:
 		mark, decoration, bg, wordBG = "−", p.remove, p.removeBG, p.removeWord
 	}
-	prefixWidth := digits + 4 // left margin, number, space, marker, space
+	prefixWidth := codeGutterWidth(width, digits)
 	contentWidth := max(1, width-prefixWidth)
 	var rows []string
 	for i, spans := range layoutSpans(line.Spans, contentWidth, m.opts.Preferences.Wrap, m.diffColumn) {
-		gutter := fmt.Sprintf(" %*d %s ", digits, lineNumber, mark)
-		if i > 0 {
-			gutter = strings.Repeat(" ", digits+2) + "↳ "
+		gutter := ""
+		if prefixWidth == digits+4 {
+			gutter = fmt.Sprintf(" %*d %s ", digits, lineNumber, mark)
+		} else if prefixWidth > 0 {
+			gutter = mark + " "
+		}
+		if i > 0 && prefixWidth > 0 {
+			gutter = strings.Repeat(" ", prefixWidth-2) + "↳ "
 		}
 		var row strings.Builder
 		row.WriteString(style(decoration).Background(bg).Render(gutter))

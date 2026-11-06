@@ -106,6 +106,31 @@ func TestRenderedBackgroundsFillRowsAndKeepSyntax(t *testing.T) {
 	}
 }
 
+func TestCodeRowsFitNarrowPreview(t *testing.T) {
+	m := demoModel(t)
+	m.opts.Preferences.Wrap = true
+	line := &highlight.Line{
+		Line:  changes.Line{Kind: changes.Added, New: 123456, Text: "abcdef"},
+		Spans: []highlight.Span{{Text: "abcdef"}},
+	}
+	for _, width := range []int{1, 2, 3, 5, 9, 10, 11} {
+		var content strings.Builder
+		for _, row := range m.codeRows(line, width, 6, false) {
+			if got := ansi.StringWidth(row); got != width {
+				t.Fatalf("%d-cell preview: code row has width %d: %q", width, got, ansi.Strip(row))
+			}
+			for _, r := range ansi.Strip(row) {
+				if r >= 'a' && r <= 'f' {
+					content.WriteRune(r)
+				}
+			}
+		}
+		if content.String() != line.Text {
+			t.Fatalf("%d-cell preview lost code while reducing its gutter: %q", width, content.String())
+		}
+	}
+}
+
 type ansiCell struct{ text, bg string }
 
 var sgr = regexp.MustCompile(`\x1b\[([0-9;]*)m`)

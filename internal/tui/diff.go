@@ -191,7 +191,7 @@ func (m *model) maxColumn() int {
 			digits = max(digits, len(strconv.Itoa(max(line.Old, line.New))))
 		}
 		for _, line := range lines {
-			available := width - digits - 4
+			available := width - codeGutterWidth(width, digits)
 			if line.Kind == changes.Hunk || line.Kind == changes.Metadata {
 				available = fullWidth - 2
 			}

@@ -45,6 +45,28 @@ codex app-server generate-json-schema --experimental --out /tmp/codex-changes-sc
 
 `--demo` 使用源码中的合成数据，不连接 Codex。项目预览从演示终端画面生成。
 
+### 本机 Yazi 列宽对照
+
+浏览栏宽的参考对象是本机 Yazi 加载的 `mobile-auto-layout` 插件，并非 Yazi 默认比例。2026-11-06 在 Yazi 26.9.1、父栏和当前栏上限均为 80 格的配置下，实际运行测得：
+
+| 窗口宽度 | Yazi 父栏 / 当前栏 / 预览 | 本项目父栏 / 当前栏 / 预览 |
+| --- | --- | --- |
+| 90 | 52 / 37 / 1 | 52 / 35 / 1 |
+| 100 | 52 / 47 / 1 | 52 / 45 / 1 |
+| 158 | 52 / 80 / 26 | 52 / 80 / 24 |
+| 220 | 52 / 80 / 88 | 52 / 80 / 86 |
+
+该用例中，前两栏分别需要 52、80 格；本项目另占两格分隔线。每种窗口宽度都切换空预览、长目录、短目录，三栏宽度应始终不变。预览内容不参与分配，空间不足时先保留父栏，再收窄当前栏，为预览保留至少一格。
+
+核验脚本复制本机配置，在独立 tmux 服务中运行已安装的 Yazi。它保留全部原有布局钩子，只在最终布局完成后记录实际栏宽；输出包含版本、原始 `init.lua` 和布局插件的 SHA-256。测试数据为临时合成目录，不操作已有终端窗口。
+
+```bash
+python3 scripts/check-yazi-layout.py
+go test ./internal/tui -run 'TestPreviewContentDoesNotResizeBrowsingColumns' -count=1
+```
+
+脚本需要 `yazi`、`tmux`、`git` 和已配置的 `mobile-auto-layout` 插件，可用 `--config`、`--yazi` 指定参考环境。这是本机可选核验，普通 `make check` 不依赖 Yazi。对照范围是浏览时的宽度分配；本项目的窄屏单栏和预览滚动行为见[使用说明](usage.md)。
+
 ## 差异渲染
 
 视觉设计参考 Claude Code 的终端 diff：整行浅底色、词语深底色、单列行号，以及新增语法与删除普通文字的区分。实现使用 Go 和公开依赖，不运行 Claude Code。
