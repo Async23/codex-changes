@@ -54,7 +54,7 @@ def main():
     output = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{canvas_w:g}" height="{canvas_h:g}" viewBox="0 0 {canvas_w:g} {canvas_h:g}">',
         '<title>Codex Changes — synthetic terminal demo</title>',
-        '<desc>A file list on the left and the selected file’s chronological patches on the right. All data is synthetic.</desc>',
+        '<desc>Revision and hunk navigation beside the selected diff. All data is synthetic.</desc>',
         f'<rect width="{canvas_w:g}" height="{canvas_h:g}" rx="10" fill="{default_bg}"/>',
         '<g fill="#647178"><circle cx="22" cy="20" r="4"/><circle cx="38" cy="20" r="4"/><circle cx="54" cy="20" r="4"/></g>',
         '<text x="78" y="25" fill="#9ba5ac" font-family="monospace" font-size="13">Codex Changes — DEMO</text>',

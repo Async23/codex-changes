@@ -1,391 +1,422 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1556.8" height="939" viewBox="0 0 1556.8 939">
+<svg xmlns="http://www.w3.org/2000/svg" width="1576" height="939" viewBox="0 0 1576 939">
 <title>Codex Changes — synthetic terminal demo</title>
-<desc>A file list on the left and the selected file’s chronological patches on the right. All data is synthetic.</desc>
-<rect width="1556.8" height="939" rx="10" fill="#faf4ed"/>
+<desc>Revision and hunk navigation beside the selected diff. All data is synthetic.</desc>
+<rect width="1576" height="939" rx="10" fill="#faf4ed"/>
 <g fill="#647178"><circle cx="22" cy="20" r="4"/><circle cx="38" cy="20" r="4"/><circle cx="54" cy="20" r="4"/></g>
 <text x="78" y="25" fill="#9ba5ac" font-family="monospace" font-size="13">Codex Changes — DEMO</text>
 <g font-family="Menlo, DejaVu Sans Mono, Noto Sans Mono CJK SC, monospace" font-size="16">
 <text x="29.6" y="51" fill="#087568" font-weight="700" opacity="1" xml:space="preserve" textLength="124.8" lengthAdjust="spacingAndGlyphs">CODEX CHANGES</text>
 <text x="173.6" y="51" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="144" lengthAdjust="spacingAndGlyphs">DEMO · 合成数据</text>
-<text x="1354.4" y="51" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="172.8" lengthAdjust="spacingAndGlyphs">s 切换会话  ? 帮助</text>
-<text x="29.6" y="74" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="172.8" lengthAdjust="spacingAndGlyphs">图表排版与导出设置</text>
-<text x="221.6" y="74" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="124.8" lengthAdjust="spacingAndGlyphs">/demo/diagram</text>
-<text x="20" y="97" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="1516.8" lengthAdjust="spacingAndGlyphs">──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</text>
-<text x="20" y="120" fill="#087568" font-weight="700" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">▸ 改动文件 3</text>
-<text x="394.4" y="120" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="404" y="120" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">  overview.svg</text>
-<text x="538.4" y="120" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="940.8" lengthAdjust="spacingAndGlyphs">                                                                                   1 次修改  累计 </text>
-<text x="1479.2" y="120" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
-<text x="1508" y="120" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
-<text x="29.6" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="172.8" lengthAdjust="spacingAndGlyphs">/ 过滤文件名或路径</text>
-<text x="394.4" y="143" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="423.2" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="297.6" lengthAdjust="spacingAndGlyphs">/demo/diagram/docs/overview.svg</text>
-<text x="1421.6" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">单栏 · 换行</text>
-<rect x="20" y="149" width="134.4" height="23" fill="#e3eee7"/>
-<text x="20" y="166" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">› overview.svg</text>
-<rect x="154.4" y="149" width="192" height="23" fill="#e3eee7"/>
-<rect x="346.4" y="149" width="48" height="23" fill="#e3eee7"/>
-<text x="346.4" y="166" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">1 次 </text>
-<text x="394.4" y="166" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="149" width="336" height="23" fill="#e3eee7"/>
-<text x="404" y="166" fill="#087568" font-weight="700" opacity="1" xml:space="preserve" textLength="336" lengthAdjust="spacingAndGlyphs"> ▾ 2026-11-04 08:30  修改 · 第 1 轮</text>
-<rect x="740" y="149" width="739.2" height="23" fill="#e3eee7"/>
-<rect x="1479.2" y="149" width="19.2" height="23" fill="#e3eee7"/>
-<text x="1479.2" y="166" fill="#248a3d" font-weight="700" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
-<text x="1508" y="166" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
-<rect x="20" y="172" width="57.6" height="23" fill="#e3eee7"/>
-<text x="20" y="189" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">  docs</text>
-<text x="336.8" y="189" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
-<text x="365.6" y="189" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
-<text x="394.4" y="189" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="404" y="189" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="643.2" lengthAdjust="spacingAndGlyphs">  你说 · 调整图中文字的位置，说明同步与备份的区别，并更新导出配置。</text>
-<text x="20" y="212" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="144" lengthAdjust="spacingAndGlyphs">  settings.json</text>
-<text x="346.4" y="212" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">1 次 </text>
-<text x="394.4" y="212" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="404" y="212" fill="#087568" font-weight="400" opacity="1" xml:space="preserve" textLength="220.8" lengthAdjust="spacingAndGlyphs">  @@ -148,11 +148,11 @@</text>
-<text x="39.2" y="235" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">export</text>
-<text x="336.8" y="235" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+3</text>
-<text x="365.6" y="235" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−3</text>
-<text x="394.4" y="235" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="404" y="235" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 148   </text>
-<text x="471.2" y="235" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">  &lt;g </text>
-<text x="519.2" y="235" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
-<text x="576.8" y="235" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">&quot;diagram-labels&quot;</text>
-<text x="730.4" y="235" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&gt;</text>
-<text x="20" y="258" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">  export.ts</text>
-<text x="346.4" y="258" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">1 次 </text>
-<text x="394.4" y="258" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="241" width="67.2" height="23" fill="#ffdcdc"/>
-<text x="404" y="258" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 149 − </text>
-<rect x="471.2" y="241" width="336" height="23" fill="#ffdcdc"/>
-<text x="471.2" y="258" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="336" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;title&quot; x=&quot;160&quot; y=&quot;</text>
-<rect x="807.2" y="241" width="28.8" height="23" fill="#ffc7c7"/>
-<text x="807.2" y="258" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">104</text>
-<rect x="836" y="241" width="163.2" height="23" fill="#ffdcdc"/>
-<text x="836" y="258" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="163.2" lengthAdjust="spacingAndGlyphs">&quot;&gt;同步副本&lt;/text&gt;</text>
-<rect x="999.2" y="241" width="537.6" height="23" fill="#ffdcdc"/>
-<text x="39.2" y="281" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">src</text>
-<text x="336.8" y="281" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+4</text>
-<text x="365.6" y="281" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−3</text>
-<text x="394.4" y="281" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="264" width="67.2" height="23" fill="#ffdcdc"/>
-<text x="404" y="281" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 150 − </text>
-<rect x="471.2" y="264" width="326.4" height="23" fill="#ffdcdc"/>
-<text x="471.2" y="281" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;160&quot; y=&quot;</text>
-<rect x="797.6" y="264" width="28.8" height="23" fill="#ffc7c7"/>
-<text x="797.6" y="281" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">134</text>
-<rect x="826.4" y="264" width="163.2" height="23" fill="#ffdcdc"/>
-<text x="826.4" y="281" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="163.2" lengthAdjust="spacingAndGlyphs">&quot;&gt;实时更新&lt;/text&gt;</text>
-<rect x="989.6" y="264" width="547.2" height="23" fill="#ffdcdc"/>
-<text x="394.4" y="304" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="287" width="67.2" height="23" fill="#ffdcdc"/>
-<text x="404" y="304" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 151 − </text>
-<rect x="471.2" y="287" width="326.4" height="23" fill="#ffdcdc"/>
-<text x="471.2" y="304" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;160&quot; y=&quot;</text>
-<rect x="797.6" y="287" width="28.8" height="23" fill="#ffc7c7"/>
-<text x="797.6" y="304" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">158</text>
-<rect x="826.4" y="287" width="19.2" height="23" fill="#ffdcdc"/>
-<text x="826.4" y="304" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">&quot;&gt;</text>
-<rect x="845.6" y="287" width="76.8" height="23" fill="#ffc7c7"/>
-<text x="845.6" y="304" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="76.8" lengthAdjust="spacingAndGlyphs">可以直接</text>
-<rect x="922.4" y="287" width="105.6" height="23" fill="#ffdcdc"/>
-<text x="922.4" y="304" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">查询&lt;/text&gt;</text>
-<rect x="1028" y="287" width="508.8" height="23" fill="#ffdcdc"/>
-<text x="394.4" y="327" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="310" width="67.2" height="23" fill="#ffdcdc"/>
-<text x="404" y="327" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 152 − </text>
-<rect x="471.2" y="310" width="326.4" height="23" fill="#ffdcdc"/>
-<text x="471.2" y="327" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;160&quot; y=&quot;</text>
-<rect x="797.6" y="310" width="28.8" height="23" fill="#ffc7c7"/>
-<text x="797.6" y="327" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">182</text>
-<rect x="826.4" y="310" width="201.6" height="23" fill="#ffdcdc"/>
-<text x="826.4" y="327" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="201.6" lengthAdjust="spacingAndGlyphs">&quot;&gt;保留最新状态&lt;/text&gt;</text>
-<rect x="1028" y="310" width="508.8" height="23" fill="#ffdcdc"/>
-<text x="394.4" y="350" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="333" width="67.2" height="23" fill="#dcffdc"/>
-<text x="404" y="350" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 149 + </text>
-<rect x="471.2" y="333" width="96" height="23" fill="#dcffdc"/>
-<text x="471.2" y="350" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
-<rect x="567.2" y="333" width="57.6" height="23" fill="#dcffdc"/>
-<text x="567.2" y="350" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
-<rect x="624.8" y="333" width="67.2" height="23" fill="#dcffdc"/>
-<text x="624.8" y="350" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">&quot;title&quot;</text>
-<rect x="692" y="333" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="701.6" y="333" width="19.2" height="23" fill="#dcffdc"/>
-<text x="701.6" y="350" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
-<rect x="720.8" y="333" width="48" height="23" fill="#dcffdc"/>
-<text x="720.8" y="350" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;160&quot;</text>
-<rect x="768.8" y="333" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="778.4" y="333" width="19.2" height="23" fill="#dcffdc"/>
-<text x="778.4" y="350" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
-<rect x="797.6" y="333" width="9.6" height="23" fill="#dcffdc"/>
-<text x="797.6" y="350" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="807.2" y="333" width="28.8" height="23" fill="#b2ffb2"/>
-<text x="807.2" y="350" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">112</text>
-<rect x="836" y="333" width="9.6" height="23" fill="#dcffdc"/>
-<text x="836" y="350" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="845.6" y="333" width="153.6" height="23" fill="#dcffdc"/>
-<text x="845.6" y="350" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">&gt;同步副本&lt;/text&gt;</text>
-<rect x="999.2" y="333" width="537.6" height="23" fill="#dcffdc"/>
-<text x="394.4" y="373" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="356" width="67.2" height="23" fill="#dcffdc"/>
-<text x="404" y="373" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 150 + </text>
-<rect x="471.2" y="356" width="96" height="23" fill="#dcffdc"/>
-<text x="471.2" y="373" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
-<rect x="567.2" y="356" width="57.6" height="23" fill="#dcffdc"/>
-<text x="567.2" y="373" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
-<rect x="624.8" y="356" width="57.6" height="23" fill="#dcffdc"/>
-<text x="624.8" y="373" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
-<rect x="682.4" y="356" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="692" y="356" width="19.2" height="23" fill="#dcffdc"/>
-<text x="692" y="373" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
-<rect x="711.2" y="356" width="48" height="23" fill="#dcffdc"/>
-<text x="711.2" y="373" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;160&quot;</text>
-<rect x="759.2" y="356" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="768.8" y="356" width="19.2" height="23" fill="#dcffdc"/>
-<text x="768.8" y="373" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
-<rect x="788" y="356" width="9.6" height="23" fill="#dcffdc"/>
-<text x="788" y="373" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="797.6" y="356" width="28.8" height="23" fill="#b2ffb2"/>
-<text x="797.6" y="373" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">142</text>
-<rect x="826.4" y="356" width="9.6" height="23" fill="#dcffdc"/>
-<text x="826.4" y="373" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="836" y="356" width="153.6" height="23" fill="#dcffdc"/>
-<text x="836" y="373" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">&gt;实时更新&lt;/text&gt;</text>
-<rect x="989.6" y="356" width="547.2" height="23" fill="#dcffdc"/>
-<text x="394.4" y="396" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="379" width="67.2" height="23" fill="#dcffdc"/>
-<text x="404" y="396" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 151 + </text>
-<rect x="471.2" y="379" width="96" height="23" fill="#dcffdc"/>
-<text x="471.2" y="396" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
-<rect x="567.2" y="379" width="57.6" height="23" fill="#dcffdc"/>
-<text x="567.2" y="396" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
-<rect x="624.8" y="379" width="57.6" height="23" fill="#dcffdc"/>
-<text x="624.8" y="396" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
-<rect x="682.4" y="379" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="692" y="379" width="19.2" height="23" fill="#dcffdc"/>
-<text x="692" y="396" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
-<rect x="711.2" y="379" width="48" height="23" fill="#dcffdc"/>
-<text x="711.2" y="396" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;160&quot;</text>
-<rect x="759.2" y="379" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="768.8" y="379" width="19.2" height="23" fill="#dcffdc"/>
-<text x="768.8" y="396" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
-<rect x="788" y="379" width="9.6" height="23" fill="#dcffdc"/>
-<text x="788" y="396" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="797.6" y="379" width="28.8" height="23" fill="#b2ffb2"/>
-<text x="797.6" y="396" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">166</text>
-<rect x="826.4" y="379" width="9.6" height="23" fill="#dcffdc"/>
-<text x="826.4" y="396" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="836" y="379" width="9.6" height="23" fill="#dcffdc"/>
-<text x="836" y="396" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&gt;</text>
-<rect x="845.6" y="379" width="115.2" height="23" fill="#b2ffb2"/>
-<text x="845.6" y="396" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">需要单独开启</text>
-<rect x="960.8" y="379" width="105.6" height="23" fill="#dcffdc"/>
-<text x="960.8" y="396" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">查询&lt;/text&gt;</text>
-<rect x="1066.4" y="379" width="470.4" height="23" fill="#dcffdc"/>
-<text x="394.4" y="419" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="402" width="67.2" height="23" fill="#dcffdc"/>
-<text x="404" y="419" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 152 + </text>
-<rect x="471.2" y="402" width="96" height="23" fill="#dcffdc"/>
-<text x="471.2" y="419" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
-<rect x="567.2" y="402" width="57.6" height="23" fill="#dcffdc"/>
-<text x="567.2" y="419" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
-<rect x="624.8" y="402" width="57.6" height="23" fill="#dcffdc"/>
-<text x="624.8" y="419" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
-<rect x="682.4" y="402" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="692" y="402" width="19.2" height="23" fill="#dcffdc"/>
-<text x="692" y="419" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
-<rect x="711.2" y="402" width="48" height="23" fill="#dcffdc"/>
-<text x="711.2" y="419" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;160&quot;</text>
-<rect x="759.2" y="402" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="768.8" y="402" width="19.2" height="23" fill="#dcffdc"/>
-<text x="768.8" y="419" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
-<rect x="788" y="402" width="9.6" height="23" fill="#dcffdc"/>
-<text x="788" y="419" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="797.6" y="402" width="28.8" height="23" fill="#b2ffb2"/>
-<text x="797.6" y="419" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">190</text>
-<rect x="826.4" y="402" width="9.6" height="23" fill="#dcffdc"/>
-<text x="826.4" y="419" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="836" y="402" width="192" height="23" fill="#dcffdc"/>
-<text x="836" y="419" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="192" lengthAdjust="spacingAndGlyphs">&gt;保留最新状态&lt;/text&gt;</text>
-<rect x="1028" y="402" width="508.8" height="23" fill="#dcffdc"/>
-<text x="394.4" y="442" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="404" y="442" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 153   </text>
-<text x="490.4" y="442" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="230.4" lengthAdjust="spacingAndGlyphs">&lt;!-- Backup schedule --&gt;</text>
-<text x="394.4" y="465" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="448" width="67.2" height="23" fill="#ffdcdc"/>
-<text x="404" y="465" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 154 − </text>
-<rect x="471.2" y="448" width="336" height="23" fill="#ffdcdc"/>
-<text x="471.2" y="465" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="336" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;title&quot; x=&quot;520&quot; y=&quot;</text>
-<rect x="807.2" y="448" width="28.8" height="23" fill="#ffc7c7"/>
-<text x="807.2" y="465" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">104</text>
-<rect x="836" y="448" width="163.2" height="23" fill="#ffdcdc"/>
-<text x="836" y="465" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="163.2" lengthAdjust="spacingAndGlyphs">&quot;&gt;定期备份&lt;/text&gt;</text>
-<rect x="999.2" y="448" width="537.6" height="23" fill="#ffdcdc"/>
-<text x="394.4" y="488" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="471" width="67.2" height="23" fill="#ffdcdc"/>
-<text x="404" y="488" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 155 − </text>
-<rect x="471.2" y="471" width="326.4" height="23" fill="#ffdcdc"/>
-<text x="471.2" y="488" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;520&quot; y=&quot;</text>
-<rect x="797.6" y="471" width="28.8" height="23" fill="#ffc7c7"/>
-<text x="797.6" y="488" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">134</text>
-<rect x="826.4" y="471" width="201.6" height="23" fill="#ffdcdc"/>
-<text x="826.4" y="488" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="201.6" lengthAdjust="spacingAndGlyphs">&quot;&gt;每天生成快照&lt;/text&gt;</text>
-<rect x="1028" y="471" width="508.8" height="23" fill="#ffdcdc"/>
-<text x="394.4" y="511" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="494" width="67.2" height="23" fill="#ffdcdc"/>
-<text x="404" y="511" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 156 − </text>
-<rect x="471.2" y="494" width="326.4" height="23" fill="#ffdcdc"/>
-<text x="471.2" y="511" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;520&quot; y=&quot;</text>
-<rect x="797.6" y="494" width="28.8" height="23" fill="#ffc7c7"/>
-<text x="797.6" y="511" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">158</text>
-<rect x="826.4" y="494" width="105.6" height="23" fill="#ffdcdc"/>
-<text x="826.4" y="511" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">&quot;&gt;保存最近 </text>
-<rect x="932" y="494" width="9.6" height="23" fill="#ffc7c7"/>
-<text x="932" y="511" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">7</text>
-<rect x="941.6" y="494" width="134.4" height="23" fill="#ffdcdc"/>
-<text x="941.6" y="511" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs"> 个版本&lt;/text&gt;</text>
-<rect x="1076" y="494" width="460.8" height="23" fill="#ffdcdc"/>
-<text x="394.4" y="534" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="517" width="67.2" height="23" fill="#ffdcdc"/>
-<text x="404" y="534" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 157 − </text>
-<rect x="471.2" y="517" width="326.4" height="23" fill="#ffdcdc"/>
-<text x="471.2" y="534" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;520&quot; y=&quot;</text>
-<rect x="797.6" y="517" width="28.8" height="23" fill="#ffc7c7"/>
-<text x="797.6" y="534" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">182</text>
-<rect x="826.4" y="517" width="76.8" height="23" fill="#ffdcdc"/>
-<text x="826.4" y="534" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="76.8" lengthAdjust="spacingAndGlyphs">&quot;&gt;恢复时</text>
-<rect x="903.2" y="517" width="115.2" height="23" fill="#ffc7c7"/>
-<text x="903.2" y="534" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">覆盖现有文件</text>
-<rect x="1018.4" y="517" width="67.2" height="23" fill="#ffdcdc"/>
-<text x="1018.4" y="534" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">&lt;/text&gt;</text>
-<rect x="1085.6" y="517" width="451.2" height="23" fill="#ffdcdc"/>
-<text x="394.4" y="557" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="540" width="67.2" height="23" fill="#dcffdc"/>
-<text x="404" y="557" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 154 + </text>
-<rect x="471.2" y="540" width="96" height="23" fill="#dcffdc"/>
-<text x="471.2" y="557" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
-<rect x="567.2" y="540" width="57.6" height="23" fill="#dcffdc"/>
-<text x="567.2" y="557" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
-<rect x="624.8" y="540" width="67.2" height="23" fill="#dcffdc"/>
-<text x="624.8" y="557" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">&quot;title&quot;</text>
-<rect x="692" y="540" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="701.6" y="540" width="19.2" height="23" fill="#dcffdc"/>
-<text x="701.6" y="557" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
-<rect x="720.8" y="540" width="48" height="23" fill="#dcffdc"/>
-<text x="720.8" y="557" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;520&quot;</text>
-<rect x="768.8" y="540" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="778.4" y="540" width="19.2" height="23" fill="#dcffdc"/>
-<text x="778.4" y="557" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
-<rect x="797.6" y="540" width="9.6" height="23" fill="#dcffdc"/>
-<text x="797.6" y="557" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="807.2" y="540" width="28.8" height="23" fill="#b2ffb2"/>
-<text x="807.2" y="557" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">112</text>
-<rect x="836" y="540" width="9.6" height="23" fill="#dcffdc"/>
-<text x="836" y="557" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="845.6" y="540" width="153.6" height="23" fill="#dcffdc"/>
-<text x="845.6" y="557" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">&gt;定期备份&lt;/text&gt;</text>
-<rect x="999.2" y="540" width="537.6" height="23" fill="#dcffdc"/>
-<text x="394.4" y="580" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="563" width="67.2" height="23" fill="#dcffdc"/>
-<text x="404" y="580" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 155 + </text>
-<rect x="471.2" y="563" width="96" height="23" fill="#dcffdc"/>
-<text x="471.2" y="580" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
-<rect x="567.2" y="563" width="57.6" height="23" fill="#dcffdc"/>
-<text x="567.2" y="580" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
-<rect x="624.8" y="563" width="57.6" height="23" fill="#dcffdc"/>
-<text x="624.8" y="580" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
-<rect x="682.4" y="563" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="692" y="563" width="19.2" height="23" fill="#dcffdc"/>
-<text x="692" y="580" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
-<rect x="711.2" y="563" width="48" height="23" fill="#dcffdc"/>
-<text x="711.2" y="580" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;520&quot;</text>
-<rect x="759.2" y="563" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="768.8" y="563" width="19.2" height="23" fill="#dcffdc"/>
-<text x="768.8" y="580" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
-<rect x="788" y="563" width="9.6" height="23" fill="#dcffdc"/>
-<text x="788" y="580" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="797.6" y="563" width="28.8" height="23" fill="#b2ffb2"/>
-<text x="797.6" y="580" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">142</text>
-<rect x="826.4" y="563" width="9.6" height="23" fill="#dcffdc"/>
-<text x="826.4" y="580" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="836" y="563" width="192" height="23" fill="#dcffdc"/>
-<text x="836" y="580" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="192" lengthAdjust="spacingAndGlyphs">&gt;每天生成快照&lt;/text&gt;</text>
-<rect x="1028" y="563" width="508.8" height="23" fill="#dcffdc"/>
-<text x="394.4" y="603" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="586" width="67.2" height="23" fill="#dcffdc"/>
-<text x="404" y="603" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 156 + </text>
-<rect x="471.2" y="586" width="96" height="23" fill="#dcffdc"/>
-<text x="471.2" y="603" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
-<rect x="567.2" y="586" width="57.6" height="23" fill="#dcffdc"/>
-<text x="567.2" y="603" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
-<rect x="624.8" y="586" width="57.6" height="23" fill="#dcffdc"/>
-<text x="624.8" y="603" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
-<rect x="682.4" y="586" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="692" y="586" width="19.2" height="23" fill="#dcffdc"/>
-<text x="692" y="603" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
-<rect x="711.2" y="586" width="48" height="23" fill="#dcffdc"/>
-<text x="711.2" y="603" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;520&quot;</text>
-<rect x="759.2" y="586" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="768.8" y="586" width="19.2" height="23" fill="#dcffdc"/>
-<text x="768.8" y="603" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
-<rect x="788" y="586" width="9.6" height="23" fill="#dcffdc"/>
-<text x="788" y="603" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="797.6" y="586" width="28.8" height="23" fill="#b2ffb2"/>
-<text x="797.6" y="603" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">166</text>
-<rect x="826.4" y="586" width="9.6" height="23" fill="#dcffdc"/>
-<text x="826.4" y="603" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="836" y="586" width="96" height="23" fill="#dcffdc"/>
-<text x="836" y="603" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">&gt;保存最近 </text>
-<rect x="932" y="586" width="19.2" height="23" fill="#b2ffb2"/>
-<text x="932" y="603" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">30</text>
-<rect x="951.2" y="586" width="134.4" height="23" fill="#dcffdc"/>
-<text x="951.2" y="603" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs"> 个版本&lt;/text&gt;</text>
-<rect x="1085.6" y="586" width="451.2" height="23" fill="#dcffdc"/>
-<text x="394.4" y="626" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="404" y="609" width="67.2" height="23" fill="#dcffdc"/>
-<text x="404" y="626" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 157 + </text>
-<rect x="471.2" y="609" width="96" height="23" fill="#dcffdc"/>
-<text x="471.2" y="626" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
-<rect x="567.2" y="609" width="57.6" height="23" fill="#dcffdc"/>
-<text x="567.2" y="626" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
-<rect x="624.8" y="609" width="57.6" height="23" fill="#dcffdc"/>
-<text x="624.8" y="626" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
-<rect x="682.4" y="609" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="692" y="609" width="19.2" height="23" fill="#dcffdc"/>
-<text x="692" y="626" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
-<rect x="711.2" y="609" width="48" height="23" fill="#dcffdc"/>
-<text x="711.2" y="626" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;520&quot;</text>
-<rect x="759.2" y="609" width="9.6" height="23" fill="#dcffdc"/>
-<rect x="768.8" y="609" width="19.2" height="23" fill="#dcffdc"/>
-<text x="768.8" y="626" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
-<rect x="788" y="609" width="9.6" height="23" fill="#dcffdc"/>
-<text x="788" y="626" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="797.6" y="609" width="28.8" height="23" fill="#b2ffb2"/>
-<text x="797.6" y="626" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">190</text>
-<rect x="826.4" y="609" width="9.6" height="23" fill="#dcffdc"/>
-<text x="826.4" y="626" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
-<rect x="836" y="609" width="67.2" height="23" fill="#dcffdc"/>
-<text x="836" y="626" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">&gt;恢复时</text>
-<rect x="903.2" y="609" width="96" height="23" fill="#b2ffb2"/>
-<text x="903.2" y="626" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">写入新目录</text>
-<rect x="999.2" y="609" width="67.2" height="23" fill="#dcffdc"/>
-<text x="999.2" y="626" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">&lt;/text&gt;</text>
-<rect x="1066.4" y="609" width="470.4" height="23" fill="#dcffdc"/>
-<text x="394.4" y="649" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="404" y="649" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 158   </text>
-<text x="471.2" y="649" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">  &lt;/g&gt;</text>
-<text x="394.4" y="672" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="394.4" y="695" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="394.4" y="718" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="394.4" y="741" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="394.4" y="764" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="394.4" y="787" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="394.4" y="810" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="394.4" y="833" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="394.4" y="856" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="1412" y="51" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">s 会话  ? 帮助</text>
+<text x="29.6" y="74" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="537.6" lengthAdjust="spacingAndGlyphs">/demo/diagram › 图表排版与导出设置 › docs › overview.svg</text>
+<text x="20" y="97" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="1536" lengthAdjust="spacingAndGlyphs">────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</text>
+<text x="20" y="120" fill="#087568" font-weight="700" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">  修改记录 1</text>
+<text x="384.8" y="120" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="394.4" y="120" fill="#087568" font-weight="700" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">  差异块 1</text>
+<text x="720.8" y="120" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="730.4" y="120" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">▸ overview.svg</text>
+<text x="864.8" y="120" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="633.6" lengthAdjust="spacingAndGlyphs">                                                      差异块 1/1  </text>
+<text x="1498.4" y="120" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
+<text x="1527.2" y="120" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
+<text x="29.6" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">Enter 进入下一层</text>
+<text x="384.8" y="143" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="404" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">Enter 进入下一层</text>
+<text x="720.8" y="143" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="749.6" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="201.6" lengthAdjust="spacingAndGlyphs">@@ -148,11 +148,11 @@</text>
+<text x="1373.6" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="172.8" lengthAdjust="spacingAndGlyphs">单块 · 单栏 · 换行</text>
+<rect x="20" y="149" width="182.4" height="23" fill="#e3eee7"/>
+<text x="20" y="166" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="182.4" lengthAdjust="spacingAndGlyphs">› 11-04 08:30  修改</text>
+<rect x="202.4" y="149" width="124.8" height="23" fill="#e3eee7"/>
+<rect x="327.2" y="149" width="19.2" height="23" fill="#e3eee7"/>
+<text x="327.2" y="166" fill="#248a3d" font-weight="700" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
+<text x="356" y="166" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
+<text x="384.8" y="166" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="394.4" y="149" width="96" height="23" fill="#e3eee7"/>
+<text x="394.4" y="166" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">› 差异块 1</text>
+<rect x="490.4" y="149" width="172.8" height="23" fill="#e3eee7"/>
+<rect x="663.2" y="149" width="19.2" height="23" fill="#e3eee7"/>
+<text x="663.2" y="166" fill="#248a3d" font-weight="700" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
+<text x="692" y="166" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
+<text x="720.8" y="166" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="149" width="336" height="23" fill="#e3eee7"/>
+<text x="730.4" y="166" fill="#087568" font-weight="700" opacity="1" xml:space="preserve" textLength="336" lengthAdjust="spacingAndGlyphs"> ▾ 2026-11-04 08:30  修改 · 第 1 轮</text>
+<rect x="1066.4" y="149" width="432" height="23" fill="#e3eee7"/>
+<rect x="1498.4" y="149" width="19.2" height="23" fill="#e3eee7"/>
+<text x="1498.4" y="166" fill="#248a3d" font-weight="700" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
+<text x="1527.2" y="166" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
+<rect x="20" y="172" width="355.2" height="23" fill="#e3eee7"/>
+<text x="20" y="189" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="355.2" lengthAdjust="spacingAndGlyphs">  第 1 轮 · 调整图中文字的位置，说明…</text>
+<text x="384.8" y="189" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="394.4" y="172" width="220.8" height="23" fill="#e3eee7"/>
+<text x="394.4" y="189" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="220.8" lengthAdjust="spacingAndGlyphs">  @@ -148,11 +148,11 @@</text>
+<text x="720.8" y="189" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="730.4" y="189" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="643.2" lengthAdjust="spacingAndGlyphs">  你说 · 调整图中文字的位置，说明同步与备份的区别，并更新导出配置。</text>
+<text x="384.8" y="212" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="212" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="730.4" y="212" fill="#087568" font-weight="400" opacity="1" xml:space="preserve" textLength="220.8" lengthAdjust="spacingAndGlyphs">  @@ -148,11 +148,11 @@</text>
+<text x="384.8" y="235" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="235" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="730.4" y="235" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 148   </text>
+<text x="797.6" y="235" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">  &lt;g </text>
+<text x="845.6" y="235" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
+<text x="903.2" y="235" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">&quot;diagram-labels&quot;</text>
+<text x="1056.8" y="235" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&gt;</text>
+<text x="384.8" y="258" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="258" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="241" width="67.2" height="23" fill="#ffdcdc"/>
+<text x="730.4" y="258" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 149 − </text>
+<rect x="797.6" y="241" width="336" height="23" fill="#ffdcdc"/>
+<text x="797.6" y="258" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="336" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;title&quot; x=&quot;160&quot; y=&quot;</text>
+<rect x="1133.6" y="241" width="28.8" height="23" fill="#ffc7c7"/>
+<text x="1133.6" y="258" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">104</text>
+<rect x="1162.4" y="241" width="163.2" height="23" fill="#ffdcdc"/>
+<text x="1162.4" y="258" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="163.2" lengthAdjust="spacingAndGlyphs">&quot;&gt;同步副本&lt;/text&gt;</text>
+<rect x="1325.6" y="241" width="230.4" height="23" fill="#ffdcdc"/>
+<text x="384.8" y="281" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="281" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="264" width="67.2" height="23" fill="#ffdcdc"/>
+<text x="730.4" y="281" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 150 − </text>
+<rect x="797.6" y="264" width="326.4" height="23" fill="#ffdcdc"/>
+<text x="797.6" y="281" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;160&quot; y=&quot;</text>
+<rect x="1124" y="264" width="28.8" height="23" fill="#ffc7c7"/>
+<text x="1124" y="281" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">134</text>
+<rect x="1152.8" y="264" width="163.2" height="23" fill="#ffdcdc"/>
+<text x="1152.8" y="281" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="163.2" lengthAdjust="spacingAndGlyphs">&quot;&gt;实时更新&lt;/text&gt;</text>
+<rect x="1316" y="264" width="240" height="23" fill="#ffdcdc"/>
+<text x="384.8" y="304" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="304" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="287" width="67.2" height="23" fill="#ffdcdc"/>
+<text x="730.4" y="304" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 151 − </text>
+<rect x="797.6" y="287" width="326.4" height="23" fill="#ffdcdc"/>
+<text x="797.6" y="304" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;160&quot; y=&quot;</text>
+<rect x="1124" y="287" width="28.8" height="23" fill="#ffc7c7"/>
+<text x="1124" y="304" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">158</text>
+<rect x="1152.8" y="287" width="19.2" height="23" fill="#ffdcdc"/>
+<text x="1152.8" y="304" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">&quot;&gt;</text>
+<rect x="1172" y="287" width="76.8" height="23" fill="#ffc7c7"/>
+<text x="1172" y="304" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="76.8" lengthAdjust="spacingAndGlyphs">可以直接</text>
+<rect x="1248.8" y="287" width="105.6" height="23" fill="#ffdcdc"/>
+<text x="1248.8" y="304" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">查询&lt;/text&gt;</text>
+<rect x="1354.4" y="287" width="201.6" height="23" fill="#ffdcdc"/>
+<text x="384.8" y="327" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="327" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="310" width="67.2" height="23" fill="#ffdcdc"/>
+<text x="730.4" y="327" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 152 − </text>
+<rect x="797.6" y="310" width="326.4" height="23" fill="#ffdcdc"/>
+<text x="797.6" y="327" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;160&quot; y=&quot;</text>
+<rect x="1124" y="310" width="28.8" height="23" fill="#ffc7c7"/>
+<text x="1124" y="327" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">182</text>
+<rect x="1152.8" y="310" width="201.6" height="23" fill="#ffdcdc"/>
+<text x="1152.8" y="327" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="201.6" lengthAdjust="spacingAndGlyphs">&quot;&gt;保留最新状态&lt;/text&gt;</text>
+<rect x="1354.4" y="310" width="201.6" height="23" fill="#ffdcdc"/>
+<text x="384.8" y="350" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="350" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="333" width="67.2" height="23" fill="#dcffdc"/>
+<text x="730.4" y="350" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 149 + </text>
+<rect x="797.6" y="333" width="96" height="23" fill="#dcffdc"/>
+<text x="797.6" y="350" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
+<rect x="893.6" y="333" width="57.6" height="23" fill="#dcffdc"/>
+<text x="893.6" y="350" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
+<rect x="951.2" y="333" width="67.2" height="23" fill="#dcffdc"/>
+<text x="951.2" y="350" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">&quot;title&quot;</text>
+<rect x="1018.4" y="333" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1028" y="333" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1028" y="350" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
+<rect x="1047.2" y="333" width="48" height="23" fill="#dcffdc"/>
+<text x="1047.2" y="350" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;160&quot;</text>
+<rect x="1095.2" y="333" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1104.8" y="333" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1104.8" y="350" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
+<rect x="1124" y="333" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1124" y="350" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1133.6" y="333" width="28.8" height="23" fill="#b2ffb2"/>
+<text x="1133.6" y="350" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">112</text>
+<rect x="1162.4" y="333" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1162.4" y="350" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1172" y="333" width="153.6" height="23" fill="#dcffdc"/>
+<text x="1172" y="350" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">&gt;同步副本&lt;/text&gt;</text>
+<rect x="1325.6" y="333" width="230.4" height="23" fill="#dcffdc"/>
+<text x="384.8" y="373" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="373" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="356" width="67.2" height="23" fill="#dcffdc"/>
+<text x="730.4" y="373" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 150 + </text>
+<rect x="797.6" y="356" width="96" height="23" fill="#dcffdc"/>
+<text x="797.6" y="373" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
+<rect x="893.6" y="356" width="57.6" height="23" fill="#dcffdc"/>
+<text x="893.6" y="373" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
+<rect x="951.2" y="356" width="57.6" height="23" fill="#dcffdc"/>
+<text x="951.2" y="373" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
+<rect x="1008.8" y="356" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1018.4" y="356" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1018.4" y="373" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
+<rect x="1037.6" y="356" width="48" height="23" fill="#dcffdc"/>
+<text x="1037.6" y="373" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;160&quot;</text>
+<rect x="1085.6" y="356" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1095.2" y="356" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1095.2" y="373" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
+<rect x="1114.4" y="356" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1114.4" y="373" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1124" y="356" width="28.8" height="23" fill="#b2ffb2"/>
+<text x="1124" y="373" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">142</text>
+<rect x="1152.8" y="356" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1152.8" y="373" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1162.4" y="356" width="153.6" height="23" fill="#dcffdc"/>
+<text x="1162.4" y="373" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">&gt;实时更新&lt;/text&gt;</text>
+<rect x="1316" y="356" width="240" height="23" fill="#dcffdc"/>
+<text x="384.8" y="396" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="396" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="379" width="67.2" height="23" fill="#dcffdc"/>
+<text x="730.4" y="396" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 151 + </text>
+<rect x="797.6" y="379" width="96" height="23" fill="#dcffdc"/>
+<text x="797.6" y="396" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
+<rect x="893.6" y="379" width="57.6" height="23" fill="#dcffdc"/>
+<text x="893.6" y="396" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
+<rect x="951.2" y="379" width="57.6" height="23" fill="#dcffdc"/>
+<text x="951.2" y="396" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
+<rect x="1008.8" y="379" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1018.4" y="379" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1018.4" y="396" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
+<rect x="1037.6" y="379" width="48" height="23" fill="#dcffdc"/>
+<text x="1037.6" y="396" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;160&quot;</text>
+<rect x="1085.6" y="379" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1095.2" y="379" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1095.2" y="396" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
+<rect x="1114.4" y="379" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1114.4" y="396" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1124" y="379" width="28.8" height="23" fill="#b2ffb2"/>
+<text x="1124" y="396" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">166</text>
+<rect x="1152.8" y="379" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1152.8" y="396" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1162.4" y="379" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1162.4" y="396" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&gt;</text>
+<rect x="1172" y="379" width="115.2" height="23" fill="#b2ffb2"/>
+<text x="1172" y="396" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">需要单独开启</text>
+<rect x="1287.2" y="379" width="105.6" height="23" fill="#dcffdc"/>
+<text x="1287.2" y="396" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">查询&lt;/text&gt;</text>
+<rect x="1392.8" y="379" width="163.2" height="23" fill="#dcffdc"/>
+<text x="384.8" y="419" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="419" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="402" width="67.2" height="23" fill="#dcffdc"/>
+<text x="730.4" y="419" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 152 + </text>
+<rect x="797.6" y="402" width="96" height="23" fill="#dcffdc"/>
+<text x="797.6" y="419" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
+<rect x="893.6" y="402" width="57.6" height="23" fill="#dcffdc"/>
+<text x="893.6" y="419" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
+<rect x="951.2" y="402" width="57.6" height="23" fill="#dcffdc"/>
+<text x="951.2" y="419" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
+<rect x="1008.8" y="402" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1018.4" y="402" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1018.4" y="419" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
+<rect x="1037.6" y="402" width="48" height="23" fill="#dcffdc"/>
+<text x="1037.6" y="419" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;160&quot;</text>
+<rect x="1085.6" y="402" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1095.2" y="402" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1095.2" y="419" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
+<rect x="1114.4" y="402" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1114.4" y="419" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1124" y="402" width="28.8" height="23" fill="#b2ffb2"/>
+<text x="1124" y="419" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">190</text>
+<rect x="1152.8" y="402" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1152.8" y="419" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1162.4" y="402" width="192" height="23" fill="#dcffdc"/>
+<text x="1162.4" y="419" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="192" lengthAdjust="spacingAndGlyphs">&gt;保留最新状态&lt;/text&gt;</text>
+<rect x="1354.4" y="402" width="201.6" height="23" fill="#dcffdc"/>
+<text x="384.8" y="442" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="442" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="730.4" y="442" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 153   </text>
+<text x="816.8" y="442" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="230.4" lengthAdjust="spacingAndGlyphs">&lt;!-- Backup schedule --&gt;</text>
+<text x="384.8" y="465" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="465" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="448" width="67.2" height="23" fill="#ffdcdc"/>
+<text x="730.4" y="465" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 154 − </text>
+<rect x="797.6" y="448" width="336" height="23" fill="#ffdcdc"/>
+<text x="797.6" y="465" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="336" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;title&quot; x=&quot;520&quot; y=&quot;</text>
+<rect x="1133.6" y="448" width="28.8" height="23" fill="#ffc7c7"/>
+<text x="1133.6" y="465" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">104</text>
+<rect x="1162.4" y="448" width="163.2" height="23" fill="#ffdcdc"/>
+<text x="1162.4" y="465" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="163.2" lengthAdjust="spacingAndGlyphs">&quot;&gt;定期备份&lt;/text&gt;</text>
+<rect x="1325.6" y="448" width="230.4" height="23" fill="#ffdcdc"/>
+<text x="384.8" y="488" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="488" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="471" width="67.2" height="23" fill="#ffdcdc"/>
+<text x="730.4" y="488" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 155 − </text>
+<rect x="797.6" y="471" width="326.4" height="23" fill="#ffdcdc"/>
+<text x="797.6" y="488" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;520&quot; y=&quot;</text>
+<rect x="1124" y="471" width="28.8" height="23" fill="#ffc7c7"/>
+<text x="1124" y="488" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">134</text>
+<rect x="1152.8" y="471" width="201.6" height="23" fill="#ffdcdc"/>
+<text x="1152.8" y="488" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="201.6" lengthAdjust="spacingAndGlyphs">&quot;&gt;每天生成快照&lt;/text&gt;</text>
+<rect x="1354.4" y="471" width="201.6" height="23" fill="#ffdcdc"/>
+<text x="384.8" y="511" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="511" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="494" width="67.2" height="23" fill="#ffdcdc"/>
+<text x="730.4" y="511" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 156 − </text>
+<rect x="797.6" y="494" width="326.4" height="23" fill="#ffdcdc"/>
+<text x="797.6" y="511" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;520&quot; y=&quot;</text>
+<rect x="1124" y="494" width="28.8" height="23" fill="#ffc7c7"/>
+<text x="1124" y="511" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">158</text>
+<rect x="1152.8" y="494" width="105.6" height="23" fill="#ffdcdc"/>
+<text x="1152.8" y="511" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="105.6" lengthAdjust="spacingAndGlyphs">&quot;&gt;保存最近 </text>
+<rect x="1258.4" y="494" width="9.6" height="23" fill="#ffc7c7"/>
+<text x="1258.4" y="511" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">7</text>
+<rect x="1268" y="494" width="134.4" height="23" fill="#ffdcdc"/>
+<text x="1268" y="511" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs"> 个版本&lt;/text&gt;</text>
+<rect x="1402.4" y="494" width="153.6" height="23" fill="#ffdcdc"/>
+<text x="384.8" y="534" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="534" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="517" width="67.2" height="23" fill="#ffdcdc"/>
+<text x="730.4" y="534" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 157 − </text>
+<rect x="797.6" y="517" width="326.4" height="23" fill="#ffdcdc"/>
+<text x="797.6" y="534" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="326.4" lengthAdjust="spacingAndGlyphs">    &lt;text class=&quot;note&quot; x=&quot;520&quot; y=&quot;</text>
+<rect x="1124" y="517" width="28.8" height="23" fill="#ffc7c7"/>
+<text x="1124" y="534" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">182</text>
+<rect x="1152.8" y="517" width="76.8" height="23" fill="#ffdcdc"/>
+<text x="1152.8" y="534" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="76.8" lengthAdjust="spacingAndGlyphs">&quot;&gt;恢复时</text>
+<rect x="1229.6" y="517" width="115.2" height="23" fill="#ffc7c7"/>
+<text x="1229.6" y="534" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">覆盖现有文件</text>
+<rect x="1344.8" y="517" width="67.2" height="23" fill="#ffdcdc"/>
+<text x="1344.8" y="534" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">&lt;/text&gt;</text>
+<rect x="1412" y="517" width="144" height="23" fill="#ffdcdc"/>
+<text x="384.8" y="557" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="557" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="540" width="67.2" height="23" fill="#dcffdc"/>
+<text x="730.4" y="557" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 154 + </text>
+<rect x="797.6" y="540" width="96" height="23" fill="#dcffdc"/>
+<text x="797.6" y="557" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
+<rect x="893.6" y="540" width="57.6" height="23" fill="#dcffdc"/>
+<text x="893.6" y="557" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
+<rect x="951.2" y="540" width="67.2" height="23" fill="#dcffdc"/>
+<text x="951.2" y="557" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">&quot;title&quot;</text>
+<rect x="1018.4" y="540" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1028" y="540" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1028" y="557" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
+<rect x="1047.2" y="540" width="48" height="23" fill="#dcffdc"/>
+<text x="1047.2" y="557" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;520&quot;</text>
+<rect x="1095.2" y="540" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1104.8" y="540" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1104.8" y="557" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
+<rect x="1124" y="540" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1124" y="557" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1133.6" y="540" width="28.8" height="23" fill="#b2ffb2"/>
+<text x="1133.6" y="557" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">112</text>
+<rect x="1162.4" y="540" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1162.4" y="557" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1172" y="540" width="153.6" height="23" fill="#dcffdc"/>
+<text x="1172" y="557" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">&gt;定期备份&lt;/text&gt;</text>
+<rect x="1325.6" y="540" width="230.4" height="23" fill="#dcffdc"/>
+<text x="384.8" y="580" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="580" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="563" width="67.2" height="23" fill="#dcffdc"/>
+<text x="730.4" y="580" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 155 + </text>
+<rect x="797.6" y="563" width="96" height="23" fill="#dcffdc"/>
+<text x="797.6" y="580" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
+<rect x="893.6" y="563" width="57.6" height="23" fill="#dcffdc"/>
+<text x="893.6" y="580" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
+<rect x="951.2" y="563" width="57.6" height="23" fill="#dcffdc"/>
+<text x="951.2" y="580" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
+<rect x="1008.8" y="563" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1018.4" y="563" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1018.4" y="580" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
+<rect x="1037.6" y="563" width="48" height="23" fill="#dcffdc"/>
+<text x="1037.6" y="580" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;520&quot;</text>
+<rect x="1085.6" y="563" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1095.2" y="563" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1095.2" y="580" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
+<rect x="1114.4" y="563" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1114.4" y="580" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1124" y="563" width="28.8" height="23" fill="#b2ffb2"/>
+<text x="1124" y="580" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">142</text>
+<rect x="1152.8" y="563" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1152.8" y="580" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1162.4" y="563" width="192" height="23" fill="#dcffdc"/>
+<text x="1162.4" y="580" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="192" lengthAdjust="spacingAndGlyphs">&gt;每天生成快照&lt;/text&gt;</text>
+<rect x="1354.4" y="563" width="201.6" height="23" fill="#dcffdc"/>
+<text x="384.8" y="603" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="603" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="586" width="67.2" height="23" fill="#dcffdc"/>
+<text x="730.4" y="603" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 156 + </text>
+<rect x="797.6" y="586" width="96" height="23" fill="#dcffdc"/>
+<text x="797.6" y="603" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
+<rect x="893.6" y="586" width="57.6" height="23" fill="#dcffdc"/>
+<text x="893.6" y="603" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
+<rect x="951.2" y="586" width="57.6" height="23" fill="#dcffdc"/>
+<text x="951.2" y="603" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
+<rect x="1008.8" y="586" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1018.4" y="586" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1018.4" y="603" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
+<rect x="1037.6" y="586" width="48" height="23" fill="#dcffdc"/>
+<text x="1037.6" y="603" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;520&quot;</text>
+<rect x="1085.6" y="586" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1095.2" y="586" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1095.2" y="603" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
+<rect x="1114.4" y="586" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1114.4" y="603" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1124" y="586" width="28.8" height="23" fill="#b2ffb2"/>
+<text x="1124" y="603" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">166</text>
+<rect x="1152.8" y="586" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1152.8" y="603" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1162.4" y="586" width="96" height="23" fill="#dcffdc"/>
+<text x="1162.4" y="603" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">&gt;保存最近 </text>
+<rect x="1258.4" y="586" width="19.2" height="23" fill="#b2ffb2"/>
+<text x="1258.4" y="603" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">30</text>
+<rect x="1277.6" y="586" width="134.4" height="23" fill="#dcffdc"/>
+<text x="1277.6" y="603" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs"> 个版本&lt;/text&gt;</text>
+<rect x="1412" y="586" width="144" height="23" fill="#dcffdc"/>
+<text x="384.8" y="626" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="626" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<rect x="730.4" y="609" width="67.2" height="23" fill="#dcffdc"/>
+<text x="730.4" y="626" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 157 + </text>
+<rect x="797.6" y="609" width="96" height="23" fill="#dcffdc"/>
+<text x="797.6" y="626" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">    &lt;text </text>
+<rect x="893.6" y="609" width="57.6" height="23" fill="#dcffdc"/>
+<text x="893.6" y="626" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">class=</text>
+<rect x="951.2" y="609" width="57.6" height="23" fill="#dcffdc"/>
+<text x="951.2" y="626" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">&quot;note&quot;</text>
+<rect x="1008.8" y="609" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1018.4" y="609" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1018.4" y="626" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">x=</text>
+<rect x="1037.6" y="609" width="48" height="23" fill="#dcffdc"/>
+<text x="1037.6" y="626" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="48" lengthAdjust="spacingAndGlyphs">&quot;520&quot;</text>
+<rect x="1085.6" y="609" width="9.6" height="23" fill="#dcffdc"/>
+<rect x="1095.2" y="609" width="19.2" height="23" fill="#dcffdc"/>
+<text x="1095.2" y="626" fill="#0086b3" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">y=</text>
+<rect x="1114.4" y="609" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1114.4" y="626" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1124" y="609" width="28.8" height="23" fill="#b2ffb2"/>
+<text x="1124" y="626" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="28.8" lengthAdjust="spacingAndGlyphs">190</text>
+<rect x="1152.8" y="609" width="9.6" height="23" fill="#dcffdc"/>
+<text x="1152.8" y="626" fill="#183691" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">&quot;</text>
+<rect x="1162.4" y="609" width="67.2" height="23" fill="#dcffdc"/>
+<text x="1162.4" y="626" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">&gt;恢复时</text>
+<rect x="1229.6" y="609" width="96" height="23" fill="#b2ffb2"/>
+<text x="1229.6" y="626" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">写入新目录</text>
+<rect x="1325.6" y="609" width="67.2" height="23" fill="#dcffdc"/>
+<text x="1325.6" y="626" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs">&lt;/text&gt;</text>
+<rect x="1392.8" y="609" width="163.2" height="23" fill="#dcffdc"/>
+<text x="384.8" y="649" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="649" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="730.4" y="649" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="67.2" lengthAdjust="spacingAndGlyphs"> 158   </text>
+<text x="797.6" y="649" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="57.6" lengthAdjust="spacingAndGlyphs">  &lt;/g&gt;</text>
+<text x="384.8" y="672" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="672" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="384.8" y="695" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="695" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="384.8" y="718" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="718" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="384.8" y="741" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="741" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="384.8" y="764" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="764" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="384.8" y="787" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="787" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="384.8" y="810" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="810" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="384.8" y="833" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="833" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="384.8" y="856" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
+<text x="720.8" y="856" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
 <text x="29.6" y="879" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="297.6" lengthAdjust="spacingAndGlyphs">已读 1 轮 · 3 个文件 · 3 次修改</text>
-<text x="20" y="902" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="672" lengthAdjust="spacingAndGlyphs"> ↑↓ 移动  Tab 区域  / 筛文件  s 会话  [ ] 修改  v 并排  w 换行  t 主题</text>
-<text x="1392.8" y="902" fill="#087568" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">? 帮助  q 退出</text>
+<text x="20" y="902" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="499.2" lengthAdjust="spacingAndGlyphs"> ↑↓ 滚动  Esc 返回  [ ] 修改  c 连续  v 并排  w 换行</text>
+<text x="1412" y="902" fill="#087568" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">? 帮助  q 退出</text>
 </g>
 </svg>

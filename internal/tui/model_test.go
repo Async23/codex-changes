@@ -16,9 +16,12 @@ import (
 func demoModel(t *testing.T) *model {
 	t.Helper()
 	m := newModel(context.Background(), Options{Demo: true, Children: true, Preferences: preferences.Defaults()})
-	m.width, m.height, m.picker, m.listLoading = 158, 38, false, false
+	m.width, m.height, m.listLoading = 158, 38, false
+	m.level, m.focusDiff = levelHunk, true
 	m.reader = codex.NewDemo()
 	m.threads, _ = m.reader.ListThreads(context.Background(), codex.ListOptions{})
+	m.rebuildProjects()
+	m.selectProjectForThread("demo-camera")
 	m.filterThreads()
 	changes.Scan(context.Background(), m.reader, "demo-camera", true, func(p changes.Progress) {
 		if p.Done {
@@ -28,7 +31,7 @@ func demoModel(t *testing.T) *model {
 			m.session = p.Session
 		}
 	})
-	m.filterFiles("")
+	m.rebuildDirectories("")
 	m.selectFile("读出时间.md")
 	m.rebuildDiff()
 	return m
@@ -38,6 +41,8 @@ func typeKey(m *model, key rune) { m.key(tea.KeyPressMsg{Code: key, Text: string
 
 func TestFindFileWithoutBrowsingTurns(t *testing.T) {
 	m := demoModel(t)
+	m.continuous, m.level, m.focusDiff = true, levelFile, false
+	m.rebuildDiff()
 	typeKey(m, '/')
 	for _, r := range "读出" {
 		typeKey(m, r)
@@ -51,14 +56,14 @@ func TestFindFileWithoutBrowsingTurns(t *testing.T) {
 		t.Fatal("file history does not show both turns")
 	}
 	m.key(tea.KeyPressMsg{Code: tea.KeyEscape})
-	if len(m.files) != 4 {
-		t.Fatal("escape did not clear filter")
+	if len(m.files) != 1 || len(m.directories) != 4 {
+		t.Fatal("escape did not clear the current directory filter")
 	}
 }
 
 func TestTypingSpacesAndUnicodeBackspace(t *testing.T) {
 	m := demoModel(t)
-	m.picker = true
+	m.level, m.focusDiff = levelSession, false
 	for _, r := range "camera 中文" {
 		typeKey(m, r)
 	}
@@ -73,8 +78,10 @@ func TestTypingSpacesAndUnicodeBackspace(t *testing.T) {
 
 func TestMouseTargetsAndCollapse(t *testing.T) {
 	m := demoModel(t)
+	m.continuous, m.level, m.focusDiff = true, levelFile, false
+	m.rebuildDiff()
 	m.click(tea.Mouse{X: 3, Y: 5, Button: tea.MouseLeft})
-	if !strings.HasSuffix(m.selectedPath(), "settings.json") {
+	if !strings.HasSuffix(m.selectedPath(), "读出时间.md") {
 		t.Fatal("mouse selected wrong file")
 	}
 	before := len(m.rows)
@@ -125,8 +132,20 @@ func TestLayoutsStayInsideTerminal(t *testing.T) {
 					f := m.selectedFile()
 					f.Path = "/synthetic/很长的目录/" + strings.Repeat("中文长文件名", 12) + ".md"
 					f.Edits[0].Lines = append(f.Edits[0].Lines, changes.Line{Kind: changes.Added, New: 123456, Text: strings.Repeat("中文 abc \t", 40)})
-					for _, screen := range []string{"files", "diff", "picker", "help"} {
-						m.picker, m.help, m.focusDiff = screen == "picker", screen == "help", screen == "diff"
+					for _, screen := range []string{"files", "diff", "projects", "sessions", "help"} {
+						m.help = screen == "help"
+						m.continuous, m.hideFiles = false, false
+						m.level, m.focusDiff = levelHunk, true
+						switch screen {
+						case "files":
+							m.continuous, m.level, m.focusDiff = true, levelFile, false
+						case "projects":
+							m.level, m.focusDiff = levelProject, false
+						case "sessions":
+							m.level, m.focusDiff = levelSession, false
+						case "help":
+							m.level, m.focusDiff = levelHunk, true
+						}
 						m.rebuildDiff()
 						for _, wrap := range []bool{true, false} {
 							m.opts.Preferences.Wrap = wrap
