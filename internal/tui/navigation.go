@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/Async23/codex-changes/internal/changes"
 )
@@ -40,10 +41,10 @@ type editHunk struct {
 }
 
 func (m *model) selectedProject() *project {
-	if m.projectCursor < 0 || m.projectCursor >= len(m.projects) {
+	if m.projectCursor < 0 || m.projectCursor >= len(m.matchingProjects) {
 		return nil
 	}
-	return &m.projects[m.projectCursor]
+	return &m.projects[m.matchingProjects[m.projectCursor]]
 }
 
 func (m *model) rebuildProjects() {
@@ -79,8 +80,25 @@ func (m *model) rebuildProjects() {
 		}
 		return m.projects[i].Path < m.projects[j].Path
 	})
+	m.filterProjects(selected)
+}
+
+func (m *model) filterProjects(preferred string) {
+	if preferred == "" {
+		if p := m.selectedProject(); p != nil {
+			preferred = p.Path
+		}
+	}
+	m.matchingProjects = nil
+	query := strings.ToLower(strings.TrimSpace(m.projectQuery))
 	for i, p := range m.projects {
-		if p.Path == selected {
+		if strings.Contains(strings.ToLower(p.Name+" "+p.Path), query) {
+			m.matchingProjects = append(m.matchingProjects, i)
+		}
+	}
+	m.projectCursor = 0
+	for i, index := range m.matchingProjects {
+		if m.projects[index].Path == preferred {
 			m.projectCursor = i
 			break
 		}
@@ -93,13 +111,14 @@ func (m *model) selectProjectForThread(id string) {
 		if thread.ID != id {
 			continue
 		}
-		for i, p := range m.projects {
-			if p.Path == filepath.Clean(thread.CWD) {
-				m.projectCursor = i
-				m.filterThreads()
-				return
-			}
+		wanted := filepath.Clean(thread.CWD)
+		m.filterProjects(wanted)
+		if p := m.selectedProject(); p == nil || p.Path != wanted {
+			m.projectQuery = ""
+			m.filterProjects(wanted)
 		}
+		m.filterThreads()
+		return
 	}
 }
 
@@ -134,6 +153,7 @@ func (m *model) filterThreads() {
 			m.matchingThreads = append(m.matchingThreads, i)
 		}
 	}
+	m.pickerCursor = 0
 	for i, index := range m.matchingThreads {
 		if m.threads[index].ID == selected {
 			m.pickerCursor = i
@@ -151,7 +171,17 @@ func (m *model) syncUpperSelection() {
 	for i, index := range m.matchingThreads {
 		if m.threads[index].ID == m.session.Thread.ID {
 			m.pickerCursor = i
-			break
+			return
+		}
+	}
+	if m.pickerQuery != "" {
+		m.pickerQuery = ""
+		m.filterThreads()
+		for i, index := range m.matchingThreads {
+			if m.threads[index].ID == m.session.Thread.ID {
+				m.pickerCursor = i
+				return
+			}
 		}
 	}
 }
@@ -166,10 +196,10 @@ func (m *model) directoryForPath(path string) directory {
 }
 
 func (m *model) selectedDirectory() *directory {
-	if m.directoryCursor < 0 || m.directoryCursor >= len(m.directories) {
+	if m.directoryCursor < 0 || m.directoryCursor >= len(m.matchingDirectories) {
 		return nil
 	}
-	return &m.directories[m.directoryCursor]
+	return &m.directories[m.matchingDirectories[m.directoryCursor]]
 }
 
 func (m *model) rebuildDirectories(preferredFile string) {
@@ -193,20 +223,45 @@ func (m *model) rebuildDirectories(preferredFile string) {
 		m.directories = append(m.directories, *d)
 	}
 	sort.Slice(m.directories, func(i, j int) bool { return m.directories[i].Label < m.directories[j].Label })
-	if preferredFile != "" {
-		selected = m.directoryForPath(preferredFile).Path
+	if preferredFile != "" && filepath.Base(preferredFile) != preferredFile {
+		path := preferredFile
+		if !filepath.IsAbs(path) {
+			path = filepath.Join(m.session.Thread.CWD, path)
+		}
+		selected = m.directoryForPath(path).Path
 	}
+	m.filterDirectories(selected)
+	m.filterFiles(preferredFile)
+}
+
+func (m *model) filterDirectories(preferred string) {
+	if preferred == "" {
+		if d := m.selectedDirectory(); d != nil {
+			preferred = d.Path
+		}
+	}
+	m.matchingDirectories = nil
+	query := strings.ToLower(strings.TrimSpace(m.directoryQuery))
 	for i, d := range m.directories {
-		if d.Path == selected {
+		if strings.Contains(strings.ToLower(d.Label+" "+d.Path), query) {
+			m.matchingDirectories = append(m.matchingDirectories, i)
+		}
+	}
+	m.directoryCursor = 0
+	for i, index := range m.matchingDirectories {
+		if m.directories[index].Path == preferred {
 			m.directoryCursor = i
 			break
 		}
 	}
-	m.filterFiles(preferredFile)
+	m.clamp()
 }
 
 func (m *model) filterFiles(preferred string) {
 	previous := m.selectedPath()
+	if preferred == "" {
+		preferred = previous
+	}
 	m.files = nil
 	query := strings.ToLower(strings.TrimSpace(m.fileQuery))
 	directoryPath := ""
@@ -225,6 +280,8 @@ func (m *model) filterFiles(preferred string) {
 	m.selectFilteredFile(preferred)
 	if previous != m.selectedPath() {
 		m.editCursor, m.hunkCursor = 0, 0
+		m.editQuery, m.hunkQuery = "", ""
+		m.matchingEdits, m.matchingHunks = nil, nil
 		m.hunks, m.hunksEditID = nil, ""
 	}
 	m.clamp()
@@ -248,7 +305,7 @@ func (m *model) selectFile(path string) bool {
 	if m.selectFilteredFile(path) {
 		return true
 	}
-	if path == "" || m.fileQuery != "" {
+	if path == "" || m.fileQuery != "" || m.directoryQuery != "" {
 		return false
 	}
 	for _, file := range m.session.Files {
@@ -256,8 +313,8 @@ func (m *model) selectFile(path string) bool {
 			continue
 		}
 		wanted := m.directoryForPath(file.Path).Path
-		for i, d := range m.directories {
-			if d.Path == wanted {
+		for i, index := range m.matchingDirectories {
+			if m.directories[index].Path == wanted {
 				m.directoryCursor = i
 				m.filterFiles(path)
 				return m.selectedPath() == file.Path
@@ -283,10 +340,51 @@ func (m *model) selectedPath() string {
 
 func (m *model) selectedEdit() *changes.Edit {
 	file := m.selectedFile()
-	if file == nil || m.editCursor < 0 || m.editCursor >= len(file.Edits) {
+	if file == nil || m.editCursor < 0 || m.editCursor >= len(m.matchingEdits) {
 		return nil
 	}
-	return &file.Edits[m.editCursor]
+	return &file.Edits[m.matchingEdits[m.editCursor]]
+}
+
+func (m *model) filterEdits() {
+	previous := ""
+	if edit := m.selectedEdit(); edit != nil {
+		previous = edit.ID
+	}
+	m.matchingEdits = nil
+	file := m.selectedFile()
+	if file != nil {
+		query := strings.ToLower(strings.TrimSpace(m.editQuery))
+		for i, edit := range file.Edits {
+			text := edit.Prompt + " " + edit.Kind + " " + editKind(edit) + " " + edit.TurnID + " " + fmt.Sprint(edit.TurnNumber)
+			if edit.Time != 0 {
+				text += " " + time.Unix(edit.Time, 0).Local().Format("2006-01-02 15:04")
+			}
+			if strings.Contains(strings.ToLower(text), query) {
+				m.matchingEdits = append(m.matchingEdits, i)
+			}
+		}
+	}
+	m.editCursor = 0
+	for i, index := range m.matchingEdits {
+		if file.Edits[index].ID == previous {
+			m.editCursor = i
+			break
+		}
+	}
+	if previous != "" {
+		selected := ""
+		if edit := m.selectedEdit(); edit != nil {
+			selected = edit.ID
+		}
+		if selected != previous {
+			m.hunkCursor, m.hunkOffset = 0, 0
+			m.hunkQuery = ""
+			m.hunks, m.matchingHunks, m.hunksEditID = nil, nil, ""
+			m.diffOffset, m.diffColumn = 0, 0
+		}
+	}
+	m.clamp()
 }
 
 func buildEditHunks(edit *changes.Edit) []editHunk {
@@ -342,32 +440,51 @@ func buildEditHunks(edit *changes.Edit) []editHunk {
 	return hunks
 }
 
-func (m *model) refreshHunks() {
-	edit := m.selectedEdit()
-	if edit == nil {
-		m.hunks, m.hunksEditID, m.hunkCursor = nil, "", 0
-		return
+func (m *model) filterHunks(preferred string) {
+	if preferred == "" {
+		if h := m.selectedHunk(); h != nil {
+			preferred = h.Title
+		}
 	}
-	previous := ""
-	if m.hunksEditID == edit.ID && m.hunkCursor >= 0 && m.hunkCursor < len(m.hunks) {
-		previous = m.hunks[m.hunkCursor].Title
-	}
-	m.hunks = buildEditHunks(edit)
-	m.hunksEditID = edit.ID
-	m.hunkCursor = 0
+	m.matchingHunks = nil
+	query := strings.ToLower(strings.TrimSpace(m.hunkQuery))
 	for i, h := range m.hunks {
-		if h.Title == previous {
+		if strings.Contains(strings.ToLower(h.Title+" "+fmt.Sprint(i+1)), query) {
+			m.matchingHunks = append(m.matchingHunks, i)
+		}
+	}
+	m.hunkCursor = 0
+	for i, index := range m.matchingHunks {
+		if m.hunks[index].Title == preferred {
 			m.hunkCursor = i
 			break
 		}
 	}
+	m.clamp()
+}
+
+func (m *model) refreshHunks() {
+	edit := m.selectedEdit()
+	if edit == nil {
+		m.hunks, m.matchingHunks, m.hunksEditID, m.hunkCursor = nil, nil, "", 0
+		return
+	}
+	previous := ""
+	if m.hunksEditID == edit.ID {
+		if h := m.selectedHunk(); h != nil {
+			previous = h.Title
+		}
+	}
+	m.hunks = buildEditHunks(edit)
+	m.hunksEditID = edit.ID
+	m.filterHunks(previous)
 }
 
 func (m *model) selectedHunk() *editHunk {
-	if m.hunkCursor < 0 || m.hunkCursor >= len(m.hunks) {
+	if m.hunkCursor < 0 || m.hunkCursor >= len(m.matchingHunks) {
 		return nil
 	}
-	return &m.hunks[m.hunkCursor]
+	return &m.hunks[m.matchingHunks[m.hunkCursor]]
 }
 
 func (m *model) projectSelectionChanged() {
@@ -386,6 +503,8 @@ func (m *model) fileSelectionChanged() {
 	m.clamp()
 	m.editCursor, m.editOffset = 0, 0
 	m.hunkCursor, m.hunkOffset = 0, 0
+	m.editQuery, m.hunkQuery = "", ""
+	m.matchingEdits, m.matchingHunks = nil, nil
 	m.hunks, m.hunksEditID = nil, ""
 	m.diffOffset, m.diffColumn = 0, 0
 	m.opts.Preferences.LastFile = m.selectedPath()
@@ -395,6 +514,8 @@ func (m *model) fileSelectionChanged() {
 func (m *model) editSelectionChanged() {
 	m.clamp()
 	m.hunkCursor, m.hunkOffset = 0, 0
+	m.hunkQuery = ""
+	m.matchingHunks = nil
 	m.hunks, m.hunksEditID = nil, ""
 	m.diffOffset, m.diffColumn = 0, 0
 	m.rebuildDiff()

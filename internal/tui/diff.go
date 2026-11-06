@@ -18,6 +18,7 @@ type displayRow struct {
 
 func (m *model) rebuildDiff() {
 	m.rows, m.anchors = nil, nil
+	m.filterEdits()
 	m.refreshHunks()
 	file := m.selectedFile()
 	if file == nil {

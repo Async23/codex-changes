@@ -103,7 +103,7 @@ func (m *model) brandRow() string {
 		label = "DEMO · 合成数据"
 	}
 	left := " " + style(p.accent).Bold(true).Render("CODEX CHANGES") + "  " + style(p.muted).Render(label)
-	return between(left, style(p.muted).Render("s 会话  ? 帮助 "), m.width)
+	return fit(left, m.width)
 }
 
 type column struct {
@@ -220,10 +220,17 @@ func (m *model) columns() []column {
 		return columns
 	}
 	remaining := m.width - (len(columns) - 1)
-	for i := range columns {
-		columns[i].width = remaining / (len(columns) - i)
-		remaining -= columns[i].width
+	if len(columns) == 2 {
+		columns[0].width = min(44, max(26, remaining/3))
+		columns[1].width = remaining - columns[0].width
+		return columns
 	}
+	// Parent and child lists provide context; the active column gets the space.
+	parent := min(30, max(20, remaining/5))
+	child := min(36, max(24, remaining/4))
+	columns[0].width = parent
+	columns[1].width = remaining - parent - child
+	columns[2].width = child
 	return columns
 }
 
@@ -242,7 +249,16 @@ func (m *model) columnAt(x int) *column {
 func (m *model) mainRows() []string {
 	p := m.palette()
 	title := "选择项目，再选择会话"
-	if m.session.Thread.ID != "" && m.level > levelSession {
+	if m.level == levelProject {
+		if p := m.selectedProject(); p != nil {
+			title = clean(p.Path)
+		}
+	} else if m.level == levelSession {
+		if i := m.selectedThreadIndex(); i >= 0 {
+			thread := m.threads[i]
+			title = clean(thread.CWD) + " › " + clean(thread.Title())
+		}
+	} else if m.session.Thread.ID != "" {
 		parts := []string{clean(m.session.Thread.CWD), clean(m.session.Thread.Title())}
 		if d := m.selectedDirectory(); d != nil && m.level >= levelDirectory {
 			parts = append(parts, clean(d.Label))
@@ -291,14 +307,14 @@ func (m *model) mainRows() []string {
 	if m.continuous {
 		toggle = "c 单块"
 	}
-	hints := " ↑↓ 选择  ←→ 层级  Enter 展开  / 筛文件  " + toggle + "  s 会话"
+	hints := " j/k 选择  h/l 层级  / 筛选  J/K 预览  " + toggle
 	if m.level <= levelSession {
-		hints = " ↑↓/jk 选择  ←→/hl 层级  Enter 打开  / 搜索"
+		hints = " j/k 选择  h/l 层级  / 筛选  Enter 打开"
 	} else if m.focusDiff {
-		hints = " ↑↓ 滚动  Esc 返回  [ ] 修改  " + toggle + "  v 并排  w 换行"
+		hints = " j/k 滚动  h 返回  [ ] 修改  " + toggle + "  v 并排  w 换行"
 	}
 	if m.narrow() {
-		hints = " ↑↓ 移动  Enter 进入  Esc 返回  s 会话  " + toggle
+		hints = " j/k 移动  l 进入  h 返回  s 会话  " + toggle
 	}
 	rows = append(rows, between(style(p.muted).Render(hints), style(p.accent).Render("? 帮助  q 退出 "), m.width))
 	return rows
@@ -325,19 +341,17 @@ func levelTitle(level navLevel) string {
 func (m *model) navigationCount(level navLevel) int {
 	switch level {
 	case levelProject:
-		return len(m.projects)
+		return len(m.matchingProjects)
 	case levelSession:
 		return len(m.matchingThreads)
 	case levelDirectory:
-		return len(m.directories)
+		return len(m.matchingDirectories)
 	case levelFile:
 		return len(m.files)
 	case levelEdit:
-		if file := m.selectedFile(); file != nil {
-			return len(file.Edits)
-		}
+		return len(m.matchingEdits)
 	case levelHunk:
-		return len(m.hunks)
+		return len(m.matchingHunks)
 	}
 	return 0
 }
@@ -362,8 +376,9 @@ func (m *model) navigationCursor(level navLevel) int {
 
 func (m *model) navigationRows(level navLevel, width int) []string {
 	p := m.palette()
+	focused := m.level == level && !m.focusDiff
 	focus := " "
-	if m.level == level && !m.focusDiff {
+	if focused {
 		focus = "▸"
 	}
 	count := m.navigationCount(level)
@@ -374,35 +389,31 @@ func (m *model) navigationRows(level navLevel, width int) []string {
 	if unavailable {
 		count = 0
 	}
-	rows := []string{fit(style(p.accent).Bold(true).Render(fmt.Sprintf("%s %s %d", focus, levelTitle(level), count)), width)}
-	hint := "Enter 进入下一层"
-	if level == levelSession {
-		hint = "/ 搜索全部会话"
-		if m.pickerQuery != "" {
-			hint = "/ " + m.pickerQuery
-			if m.filtering && m.level == levelSession {
-				hint += "▏"
-			}
-		}
-	} else if level == levelFile {
-		hint = "/ 过滤当前目录"
-		if m.fileQuery != "" || m.filtering && m.level == levelFile {
-			hint = "/ " + m.fileQuery
-			if m.filtering && m.level == levelFile {
-				hint += "▏"
-			}
+	header := style(p.muted).Render(fmt.Sprintf("%s %s %d", focus, levelTitle(level), count))
+	if focused {
+		header = style(p.accent).Bold(true).Render(fmt.Sprintf("%s %s %d", focus, levelTitle(level), count))
+	}
+	rows := []string{fit(header, width)}
+	hint := ""
+	if query := m.currentQueryFor(level); query != "" || m.filtering && m.level == level {
+		hint = "/ " + query
+		if m.filtering && m.level == level {
+			hint += "▏"
 		}
 	}
 	rows = append(rows, fit(" "+style(p.muted).Render(hint), width))
 	if !unavailable {
 		offset, cursor := m.listOffset(level), m.navigationCursor(level)
-		for i := offset; i < count && len(rows)+1 < m.bodyHeight(); i++ {
-			first, second := m.navigationItem(level, i, width)
+		for i := offset; i < count && len(rows) < m.bodyHeight(); i++ {
+			row := m.navigationItem(level, i, width)
 			if i == cursor {
-				first = style(p.fg).Bold(true).Background(p.selected).Render(first)
-				second = style(p.muted).Background(p.selected).Render(second)
+				if focused {
+					row = style(p.fg).Bold(true).Background(p.selected).Render(row)
+				} else {
+					row = style(p.fg).Bold(true).Render(row)
+				}
 			}
-			rows = append(rows, first, second)
+			rows = append(rows, row)
 		}
 	}
 	if count == 0 {
@@ -410,11 +421,9 @@ func (m *model) navigationRows(level navLevel, width int) []string {
 		if m.listLoading || m.loading {
 			message = "正在读取…"
 		} else if unavailable {
-			message = "Enter 读取所选会话"
-		} else if level == levelFile && m.fileQuery != "" {
-			message = "当前目录没有匹配文件"
-		} else if level == levelSession && m.pickerQuery != "" {
-			message = "没有匹配的会话"
+			message = "选择会话后自动读取"
+		} else if m.currentQueryFor(level) != "" {
+			message = "当前栏没有匹配项"
 		}
 		rows = append(rows, fit("  "+style(p.muted).Render(message), width))
 	}
@@ -424,7 +433,7 @@ func (m *model) navigationRows(level navLevel, width int) []string {
 	return rows[:m.bodyHeight()]
 }
 
-func (m *model) navigationItem(level navLevel, index, width int) (string, string) {
+func (m *model) navigationItem(level navLevel, index, width int) string {
 	p := m.palette()
 	mark := "  "
 	if index == m.navigationCursor(level) {
@@ -432,40 +441,38 @@ func (m *model) navigationItem(level navLevel, index, width int) (string, string
 	}
 	switch level {
 	case levelProject:
-		item := m.projects[index]
-		return between(mark+style(p.fg).Render(clean(item.Name)), style(p.muted).Render(fmt.Sprintf("%d 会话 ", item.Sessions)), width), fit("  "+style(p.muted).Render(clean(item.Path)), width)
+		item := m.projects[m.matchingProjects[index]]
+		return between(mark+clean(item.Name), style(p.muted).Render(fmt.Sprintf("%d 会话 ", item.Sessions)), width)
 	case levelSession:
 		thread := m.threads[m.matchingThreads[index]]
-		date := time.Unix(thread.UpdatedAt, 0).Local().Format("01-02 15:04") + " "
-		second := clean(thread.CWD)
+		title := clean(thread.Title())
 		if thread.Archived {
-			second = "[已归档] " + second
+			title += " [已归档]"
 		}
-		return between(mark+clean(thread.Title()), style(p.muted).Render(date), width), fit("  "+style(p.muted).Render(second), width)
+		date := time.Unix(thread.UpdatedAt, 0).Local().Format("01-02 15:04") + " "
+		return between(mark+title, style(p.muted).Render(date), width)
 	case levelDirectory:
-		item := m.directories[index]
-		return between(mark+clean(item.Label), style(p.muted).Render(fmt.Sprintf("%d 文件 ", item.Files)), width), fit("  "+style(p.muted).Render(clean(item.Path)), width)
+		item := m.directories[m.matchingDirectories[index]]
+		return between(mark+clean(item.Label), style(p.muted).Render(fmt.Sprintf("%d 文件 ", item.Files)), width)
 	case levelFile:
 		file := m.session.Files[m.files[index]]
-		count := fmt.Sprintf("%d 次 ", len(file.Edits))
-		stats := style(p.add).Render(fmt.Sprintf("+%d", file.Added)) + " " + style(p.remove).Render(fmt.Sprintf("−%d", file.Removed)) + " "
-		return between(mark+clean(filepath.Base(file.Path)), count, width), between("  "+style(p.muted).Render(clean(file.Path)), stats, width)
+		right := style(p.muted).Render(fmt.Sprintf("%d 次  ", len(file.Edits))) + style(p.add).Render(fmt.Sprintf("+%d", file.Added)) + " " + style(p.remove).Render(fmt.Sprintf("−%d", file.Removed)) + " "
+		return between(mark+clean(filepath.Base(file.Path)), right, width)
 	case levelEdit:
-		edit := m.selectedFile().Edits[index]
+		edit := m.selectedFile().Edits[m.matchingEdits[index]]
 		stamp := "时间未记录"
 		if edit.Time != 0 {
 			stamp = time.Unix(edit.Time, 0).Local().Format("01-02 15:04")
 		}
+		label := fmt.Sprintf("%s%s  %s · 第 %d 轮", mark, stamp, editKind(edit), edit.TurnNumber)
 		stats := style(p.add).Render(fmt.Sprintf("+%d", edit.Added)) + " " + style(p.remove).Render(fmt.Sprintf("−%d", edit.Removed)) + " "
-		first := between(mark+stamp+"  "+editKind(edit), stats, width)
-		second := fit("  "+style(p.muted).Render(fmt.Sprintf("第 %d 轮 · %s", edit.TurnNumber, clean(edit.Prompt))), width)
-		return first, second
+		return between(label, stats, width)
 	case levelHunk:
-		h := m.hunks[index]
+		h := m.hunks[m.matchingHunks[index]]
 		stats := style(p.add).Render(fmt.Sprintf("+%d", h.Added)) + " " + style(p.remove).Render(fmt.Sprintf("−%d", h.Removed)) + " "
-		return between(mark+fmt.Sprintf("差异块 %d", index+1), stats, width), fit("  "+style(p.muted).Render(clean(h.Title)), width)
+		return between(mark+fmt.Sprintf("差异块 %d", m.matchingHunks[index]+1), stats, width)
 	}
-	return "", ""
+	return ""
 }
 
 func editKind(edit changes.Edit) string {
@@ -508,7 +515,7 @@ func (m *model) diffRows(width int) []string {
 	if !m.continuous {
 		mode = "单块"
 		if h := m.selectedHunk(); h != nil {
-			stats = fmt.Sprintf("差异块 %d/%d  ", m.hunkCursor+1, len(m.hunks)) + style(p.add).Render(fmt.Sprintf("+%d", h.Added)) + " " + style(p.remove).Render(fmt.Sprintf("−%d", h.Removed)) + " "
+			stats = fmt.Sprintf("差异块 %d/%d  ", m.matchingHunks[m.hunkCursor]+1, len(m.hunks)) + style(p.add).Render(fmt.Sprintf("+%d", h.Added)) + " " + style(p.remove).Render(fmt.Sprintf("−%d", h.Removed)) + " "
 		}
 	}
 	if m.opts.Preferences.Split && width >= 60 {
@@ -549,8 +556,7 @@ func (m *model) helpRows() []string {
 		"  ← → / h l  返回或进入层级     Enter  展开；在差异中进入阅读",
 		"  ↑↓ / j k   选择或滚动         Tab / Shift+Tab  切换可见区域",
 		"  鼠标点击选择；滚轮滚动鼠标所在区域。",
-		"  / 或 f     输入会话搜索；Enter 接受，Esc 取消；Ctrl+R 刷新列表",
-		"  / 或 f     过滤当前目录中的文件；Esc 清除筛选或返回",
+		"  / 或 f     筛选当前栏；Enter 接受，Esc 清除；Ctrl+R 刷新列表",
 		"  c          单块 / 连续时间线    [ / ]  上一条 / 下一条修改",
 		"  Space      连续模式中折叠或展开当前修改",
 		"  v          单栏 / 并排          w  自动换行 / 横向滚动",

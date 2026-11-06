@@ -7,34 +7,25 @@
 <g font-family="Menlo, DejaVu Sans Mono, Noto Sans Mono CJK SC, monospace" font-size="16">
 <text x="29.6" y="51" fill="#087568" font-weight="700" opacity="1" xml:space="preserve" textLength="124.8" lengthAdjust="spacingAndGlyphs">CODEX CHANGES</text>
 <text x="173.6" y="51" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="144" lengthAdjust="spacingAndGlyphs">DEMO · 合成数据</text>
-<text x="1412" y="51" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">s 会话  ? 帮助</text>
 <text x="29.6" y="74" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="537.6" lengthAdjust="spacingAndGlyphs">/demo/diagram › 图表排版与导出设置 › docs › overview.svg</text>
 <text x="20" y="97" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="1536" lengthAdjust="spacingAndGlyphs">────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────</text>
-<text x="20" y="120" fill="#087568" font-weight="700" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">  修改记录 1</text>
+<text x="20" y="120" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="115.2" lengthAdjust="spacingAndGlyphs">  修改记录 1</text>
 <text x="384.8" y="120" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="394.4" y="120" fill="#087568" font-weight="700" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">  差异块 1</text>
+<text x="394.4" y="120" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">  差异块 1</text>
 <text x="720.8" y="120" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
 <text x="730.4" y="120" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">▸ overview.svg</text>
 <text x="864.8" y="120" fill="#333333" font-weight="400" opacity="1" xml:space="preserve" textLength="633.6" lengthAdjust="spacingAndGlyphs">                                                      差异块 1/1  </text>
 <text x="1498.4" y="120" fill="#248a3d" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
 <text x="1527.2" y="120" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
-<text x="29.6" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">Enter 进入下一层</text>
 <text x="384.8" y="143" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<text x="404" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="153.6" lengthAdjust="spacingAndGlyphs">Enter 进入下一层</text>
 <text x="720.8" y="143" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
 <text x="749.6" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="201.6" lengthAdjust="spacingAndGlyphs">@@ -148,11 +148,11 @@</text>
 <text x="1373.6" y="143" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="172.8" lengthAdjust="spacingAndGlyphs">单块 · 单栏 · 换行</text>
-<rect x="20" y="149" width="182.4" height="23" fill="#e3eee7"/>
-<text x="20" y="166" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="182.4" lengthAdjust="spacingAndGlyphs">› 11-04 08:30  修改</text>
-<rect x="202.4" y="149" width="124.8" height="23" fill="#e3eee7"/>
-<rect x="327.2" y="149" width="19.2" height="23" fill="#e3eee7"/>
+<text x="20" y="166" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="307.2" lengthAdjust="spacingAndGlyphs">› 11-04 08:30  修改 · 第 1 轮   </text>
 <text x="327.2" y="166" fill="#248a3d" font-weight="700" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
 <text x="356" y="166" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
 <text x="384.8" y="166" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="394.4" y="149" width="96" height="23" fill="#e3eee7"/>
 <text x="394.4" y="166" fill="#333333" font-weight="700" opacity="1" xml:space="preserve" textLength="96" lengthAdjust="spacingAndGlyphs">› 差异块 1</text>
-<rect x="490.4" y="149" width="172.8" height="23" fill="#e3eee7"/>
-<rect x="663.2" y="149" width="19.2" height="23" fill="#e3eee7"/>
 <text x="663.2" y="166" fill="#248a3d" font-weight="700" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
 <text x="692" y="166" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
 <text x="720.8" y="166" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
@@ -44,11 +35,7 @@
 <rect x="1498.4" y="149" width="19.2" height="23" fill="#e3eee7"/>
 <text x="1498.4" y="166" fill="#248a3d" font-weight="700" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">+8</text>
 <text x="1527.2" y="166" fill="#cf222e" font-weight="400" opacity="1" xml:space="preserve" textLength="19.2" lengthAdjust="spacingAndGlyphs">−8</text>
-<rect x="20" y="172" width="355.2" height="23" fill="#e3eee7"/>
-<text x="20" y="189" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="355.2" lengthAdjust="spacingAndGlyphs">  第 1 轮 · 调整图中文字的位置，说明…</text>
 <text x="384.8" y="189" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
-<rect x="394.4" y="172" width="220.8" height="23" fill="#e3eee7"/>
-<text x="394.4" y="189" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="220.8" lengthAdjust="spacingAndGlyphs">  @@ -148,11 +148,11 @@</text>
 <text x="720.8" y="189" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
 <text x="730.4" y="189" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="643.2" lengthAdjust="spacingAndGlyphs">  你说 · 调整图中文字的位置，说明同步与备份的区别，并更新导出配置。</text>
 <text x="384.8" y="212" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
@@ -416,7 +403,7 @@
 <text x="384.8" y="856" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
 <text x="720.8" y="856" fill="#d6d1c9" font-weight="400" opacity="1" xml:space="preserve" textLength="9.6" lengthAdjust="spacingAndGlyphs">│</text>
 <text x="29.6" y="879" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="297.6" lengthAdjust="spacingAndGlyphs">已读 1 轮 · 3 个文件 · 3 次修改</text>
-<text x="20" y="902" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="499.2" lengthAdjust="spacingAndGlyphs"> ↑↓ 滚动  Esc 返回  [ ] 修改  c 连续  v 并排  w 换行</text>
+<text x="20" y="902" fill="#7c817a" font-weight="400" opacity="1" xml:space="preserve" textLength="489.6" lengthAdjust="spacingAndGlyphs"> j/k 滚动  h 返回  [ ] 修改  c 连续  v 并排  w 换行</text>
 <text x="1412" y="902" fill="#087568" font-weight="400" opacity="1" xml:space="preserve" textLength="134.4" lengthAdjust="spacingAndGlyphs">? 帮助  q 退出</text>
 </g>
 </svg>

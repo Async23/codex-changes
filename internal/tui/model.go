@@ -32,6 +32,8 @@ type model struct {
 	dark                             bool
 	level                            navLevel
 	projects                         []project
+	matchingProjects                 []int
+	projectQuery                     string
 	projectCursor, projectOffset     int
 	threads                          []codex.Thread
 	matchingThreads                  []int
@@ -39,13 +41,19 @@ type model struct {
 	pickerCursor, pickerOffset       int
 	session                          changes.Session
 	directories                      []directory
+	matchingDirectories              []int
+	directoryQuery                   string
 	directoryCursor, directoryOffset int
 	files                            []int
 	fileQuery                        string
 	filtering                        bool
 	fileCursor, fileOffset           int
+	matchingEdits                    []int
+	editQuery                        string
 	editCursor, editOffset           int
 	hunks                            []editHunk
+	matchingHunks                    []int
+	hunkQuery                        string
 	hunksEditID                      string
 	hunkCursor, hunkOffset           int
 	focusDiff                        bool
@@ -161,6 +169,7 @@ func (m *model) openThread(id string, target navLevel) tea.Cmd {
 	m.level, m.focusDiff = target, target == levelHunk
 	m.hideFiles = false
 	m.fileQuery = ""
+	m.directoryQuery, m.editQuery, m.hunkQuery = "", "", ""
 	if target != levelSession {
 		m.filtering = false
 	}
@@ -169,7 +178,8 @@ func (m *model) openThread(id string, target navLevel) tea.Cmd {
 	m.hunkCursor, m.hunkOffset = 0, 0
 	m.diffOffset, m.diffColumn = 0, 0
 	m.session, m.directories, m.files, m.rows = changes.Session{}, nil, nil, nil
-	m.hunks, m.hunksEditID = nil, ""
+	m.matchingDirectories, m.matchingEdits = nil, nil
+	m.hunks, m.matchingHunks, m.hunksEditID = nil, nil, ""
 	m.collapsed = make(map[string]bool)
 	m.highlights = highlightCache{}
 	if previousThread != id {
@@ -253,9 +263,10 @@ func (m *model) Update(message tea.Msg) (tea.Model, tea.Cmd) {
 		m.rebuildDirectories(preferred)
 		m.selectFile(preferred)
 		if previousPath != "" && previousPath == m.selectedPath() {
+			m.filterEdits()
 			if file := m.selectedFile(); file != nil {
-				for i, edit := range file.Edits {
-					if edit.ID == previousEdit {
+				for i, index := range m.matchingEdits {
+					if file.Edits[index].ID == previousEdit {
 						m.editCursor = i
 						break
 					}
@@ -297,15 +308,9 @@ func (m *model) Update(message tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyPressMsg:
 		return m, m.key(msg)
 	case tea.PasteMsg:
-		if m.filtering && m.level == levelSession {
-			m.pickerQuery += inputText(msg.Content)
-			m.pickerCursor = 0
-			m.filterThreads()
-			return m, m.previewSelectedThread()
-		} else if m.filtering {
-			m.fileQuery += inputText(msg.Content)
-			m.filterFiles("")
-			m.rebuildDiff()
+		if m.filtering {
+			m.setCurrentQuery(m.currentQuery() + inputText(msg.Content))
+			return m, m.applyCurrentFilter()
 		}
 	case tea.MouseClickMsg:
 		return m, m.click(msg.Mouse())
@@ -346,6 +351,13 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 		}
 		return m.listCmd()
 	case "r":
+		if m.level <= levelSession {
+			m.listLoading = true
+			if m.reader == nil {
+				return m.Init()
+			}
+			return m.listCmd()
+		}
 		if m.reader == nil {
 			m.listLoading, m.err = true, ""
 			return m.Init()
@@ -354,30 +366,21 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 	case "tab", "shift+tab":
 		m.cycleFocus(key == "shift+tab")
 	case "/", "f":
-		if m.level <= levelSession {
-			m.level, m.focusDiff, m.hideFiles = levelSession, false, false
+		if !m.focusDiff {
 			m.filtering = true
-			m.filterThreads()
-		} else if m.level == levelFile || m.continuous {
-			m.filtering, m.focusDiff, m.hideFiles = true, false, false
-			m.rebuildDiff()
 		}
 	case "esc":
-		if m.level == levelSession && m.pickerQuery != "" {
-			m.pickerQuery = ""
-			m.filterThreads()
-			return m.previewSelectedThread()
+		if m.currentQuery() != "" {
+			m.setCurrentQuery("")
+			return m.applyCurrentFilter()
 		}
-		if m.level == levelFile && m.fileQuery != "" {
-			m.fileQuery = ""
-			m.filterFiles(m.selectedPath())
-			m.rebuildDiff()
-		} else {
-			m.back()
-		}
+		m.back()
 	case "enter":
 		return m.drillDown()
 	case "b":
+		if !m.diffVisible() && !m.hideFiles {
+			break
+		}
 		m.hideFiles = !m.hideFiles
 		if m.hideFiles {
 			if !m.continuous {
@@ -389,21 +392,29 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 		}
 		m.rebuildDiff()
 	case "c":
-		if m.level >= levelDirectory {
+		if m.level >= levelFile {
 			m.toggleContinuous()
 		}
 	case "w":
+		if !m.diffVisible() {
+			break
+		}
 		m.opts.Preferences.Wrap = !m.opts.Preferences.Wrap
 		m.diffColumn = 0
 		m.rebuildDiff()
 	case "v":
+		if !m.diffVisible() {
+			break
+		}
 		m.opts.Preferences.Split = !m.opts.Preferences.Split
 		m.rebuildDiff()
 	case "t":
 		m.toggleTheme()
 	case "y":
-		if path := m.selectedPath(); path != "" {
-			return copyPath(path)
+		if m.level >= levelFile {
+			if path := m.selectedPath(); path != "" {
+				return copyPath(path)
+			}
 		}
 	case "up", "k":
 		return m.move(-1)
@@ -432,11 +443,15 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 			return m.move(1 << 30)
 		}
 	case "J":
-		m.diffOffset += 5
-		m.clamp()
+		if m.diffVisible() {
+			m.diffOffset += 5
+			m.clamp()
+		}
 	case "K":
-		m.diffOffset -= 5
-		m.clamp()
+		if m.diffVisible() {
+			m.diffOffset -= 5
+			m.clamp()
+		}
 	case "left":
 		if m.focusDiff && !m.opts.Preferences.Wrap {
 			m.diffColumn = max(0, m.diffColumn-8)
@@ -463,42 +478,95 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 	return nil
 }
 
-func (m *model) filterKey(msg tea.KeyPressMsg) tea.Cmd {
-	if m.level == levelSession {
-		switch msg.String() {
-		case "enter":
-			m.filtering = false
-			return nil
-		case "esc":
-			m.filtering = false
-			m.pickerQuery = ""
-		case "backspace":
-			m.pickerQuery = backspace(m.pickerQuery)
-		case "ctrl+u":
-			m.pickerQuery = ""
-		default:
-			m.pickerQuery += inputText(msg.Key().Text)
-		}
-		m.pickerCursor = 0
-		m.filterThreads()
-		return m.previewSelectedThread()
+func (m *model) currentQuery() string {
+	return m.currentQueryFor(m.level)
+}
+
+func (m *model) currentQueryFor(level navLevel) string {
+	switch level {
+	case levelProject:
+		return m.projectQuery
+	case levelSession:
+		return m.pickerQuery
+	case levelDirectory:
+		return m.directoryQuery
+	case levelFile:
+		return m.fileQuery
+	case levelEdit:
+		return m.editQuery
+	case levelHunk:
+		return m.hunkQuery
 	}
+	return ""
+}
+
+func (m *model) setCurrentQuery(query string) {
+	switch m.level {
+	case levelProject:
+		m.projectQuery = query
+	case levelSession:
+		m.pickerQuery = query
+	case levelDirectory:
+		m.directoryQuery = query
+	case levelFile:
+		m.fileQuery = query
+	case levelEdit:
+		m.editQuery = query
+	case levelHunk:
+		m.hunkQuery = query
+	}
+}
+
+func (m *model) filterKey(msg tea.KeyPressMsg) tea.Cmd {
 	switch msg.String() {
 	case "enter":
 		m.filtering = false
+		return nil
 	case "esc":
 		m.filtering = false
-		m.fileQuery = ""
+		m.setCurrentQuery("")
 	case "backspace":
-		m.fileQuery = backspace(m.fileQuery)
+		m.setCurrentQuery(backspace(m.currentQuery()))
 	case "ctrl+u":
-		m.fileQuery = ""
+		m.setCurrentQuery("")
 	default:
-		m.fileQuery += inputText(msg.Key().Text)
+		m.setCurrentQuery(m.currentQuery() + inputText(msg.Key().Text))
 	}
-	m.filterFiles("")
-	m.rebuildDiff()
+	return m.applyCurrentFilter()
+}
+
+func (m *model) applyCurrentFilter() tea.Cmd {
+	switch m.level {
+	case levelProject:
+		m.filterProjects("")
+		m.projectSelectionChanged()
+	case levelSession:
+		m.filterThreads()
+		return m.previewSelectedThread()
+	case levelDirectory:
+		m.filterDirectories("")
+		m.directorySelectionChanged()
+	case levelFile:
+		m.filterFiles("")
+		m.rebuildDiff()
+	case levelEdit:
+		m.filterEdits()
+		m.rebuildDiff()
+	case levelHunk:
+		m.filterHunks("")
+		m.diffOffset = 0
+		m.rebuildDiff()
+	}
 	return nil
+}
+
+func (m *model) diffVisible() bool {
+	for _, column := range m.columns() {
+		if column.diff {
+			return true
+		}
+	}
+	return false
 }
 
 func (m *model) previewSelectedThread() tea.Cmd {
@@ -565,11 +633,11 @@ func (m *model) drillDown() tea.Cmd {
 			m.level = levelFile
 		}
 	case levelFile:
-		if m.selectedFile() != nil && len(m.selectedFile().Edits) > 0 {
+		if m.selectedFile() != nil && len(m.matchingEdits) > 0 {
 			m.level = levelEdit
 		}
 	case levelEdit:
-		if len(m.hunks) > 0 {
+		if len(m.matchingHunks) > 0 {
 			m.level = levelHunk
 		}
 	case levelHunk:
@@ -635,6 +703,8 @@ func (m *model) toggleContinuous() {
 	m.diffOffset, m.diffColumn = 0, 0
 	if m.continuous {
 		m.level, m.focusDiff = levelFile, true
+		m.editQuery, m.hunkQuery = "", ""
+		m.filterEdits()
 	} else {
 		m.level, m.focusDiff = levelHunk, true
 	}
@@ -678,6 +748,14 @@ func (m *model) move(delta int) tea.Cmd {
 
 func (m *model) jumpEdit(direction int) {
 	if !m.continuous {
+		if m.level == levelEdit {
+			m.editCursor += direction
+			m.editSelectionChanged()
+			return
+		}
+		if m.level != levelHunk {
+			return
+		}
 		m.editCursor += direction
 		m.level, m.focusDiff = levelHunk, true
 		m.editSelectionChanged()
@@ -735,20 +813,17 @@ func visibleStart(start, cursor, size, length int) int {
 }
 
 func (m *model) clamp() {
-	m.projectCursor = max(0, min(m.projectCursor, len(m.projects)-1))
+	m.projectCursor = max(0, min(m.projectCursor, len(m.matchingProjects)-1))
 	m.pickerCursor = max(0, min(m.pickerCursor, len(m.matchingThreads)-1))
-	m.directoryCursor = max(0, min(m.directoryCursor, len(m.directories)-1))
+	m.directoryCursor = max(0, min(m.directoryCursor, len(m.matchingDirectories)-1))
 	m.fileCursor = max(0, min(m.fileCursor, len(m.files)-1))
-	editCount, hunkCount := 0, len(m.hunks)
-	if file := m.selectedFile(); file != nil {
-		editCount = len(file.Edits)
-	}
+	editCount, hunkCount := len(m.matchingEdits), len(m.matchingHunks)
 	m.editCursor = max(0, min(m.editCursor, editCount-1))
 	m.hunkCursor = max(0, min(m.hunkCursor, hunkCount-1))
 	page := max(1, m.listPage())
-	m.projectOffset = visibleStart(m.projectOffset, m.projectCursor, page, len(m.projects))
+	m.projectOffset = visibleStart(m.projectOffset, m.projectCursor, page, len(m.matchingProjects))
 	m.pickerOffset = visibleStart(m.pickerOffset, m.pickerCursor, page, len(m.matchingThreads))
-	m.directoryOffset = visibleStart(m.directoryOffset, m.directoryCursor, page, len(m.directories))
+	m.directoryOffset = visibleStart(m.directoryOffset, m.directoryCursor, page, len(m.matchingDirectories))
 	m.fileOffset = visibleStart(m.fileOffset, m.fileCursor, page, len(m.files))
 	m.editOffset = visibleStart(m.editOffset, m.editCursor, page, editCount)
 	m.hunkOffset = visibleStart(m.hunkOffset, m.hunkCursor, page, hunkCount)
@@ -757,7 +832,7 @@ func (m *model) clamp() {
 
 func (m *model) bodyHeight() int { return max(1, m.height-5) }
 func (m *model) diffHeight() int { return max(1, m.bodyHeight()-2) }
-func (m *model) listPage() int   { return max(1, (m.bodyHeight()-2)/2) }
+func (m *model) listPage() int   { return max(1, m.bodyHeight()-2) }
 func (m *model) narrow() bool    { return m.width < 90 }
 func (m *model) sidebarWidth() int {
 	for _, column := range m.columns() {
@@ -807,14 +882,14 @@ func (m *model) click(mouse tea.Mouse) tea.Cmd {
 		return nil
 	}
 	m.level, m.focusDiff = column.level, false
-	if mouse.Y == 4 && m.level == levelFile {
+	if mouse.Y == 4 {
 		m.filtering = true
 		return nil
 	}
 	if mouse.Y < 5 {
 		return nil
 	}
-	index := m.listOffset(m.level) + (mouse.Y-5)/2
+	index := m.listOffset(m.level) + mouse.Y - 5
 	if !m.setCursor(m.level, index) {
 		return nil
 	}
@@ -865,7 +940,7 @@ func (m *model) setCursor(level navLevel, index int) bool {
 	m.level = level
 	switch level {
 	case levelProject:
-		if index >= len(m.projects) {
+		if index >= len(m.matchingProjects) {
 			return false
 		}
 		m.projectCursor = index
@@ -876,7 +951,7 @@ func (m *model) setCursor(level navLevel, index int) bool {
 		}
 		m.pickerCursor = index
 	case levelDirectory:
-		if index >= len(m.directories) {
+		if index >= len(m.matchingDirectories) {
 			return false
 		}
 		m.directoryCursor = index
@@ -888,13 +963,13 @@ func (m *model) setCursor(level navLevel, index int) bool {
 		m.fileCursor = index
 		m.fileSelectionChanged()
 	case levelEdit:
-		if m.selectedFile() == nil || index >= len(m.selectedFile().Edits) {
+		if m.selectedFile() == nil || index >= len(m.matchingEdits) {
 			return false
 		}
 		m.editCursor = index
 		m.editSelectionChanged()
 	case levelHunk:
-		if index >= len(m.hunks) {
+		if index >= len(m.matchingHunks) {
 			return false
 		}
 		m.hunkCursor = index

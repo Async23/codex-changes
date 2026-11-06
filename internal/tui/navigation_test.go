@@ -66,7 +66,7 @@ func TestHunkSelectionLimitsRenderedDiff(t *testing.T) {
 
 func TestExplicitSessionSearchPreservesText(t *testing.T) {
 	m := demoModel(t)
-	m.level, m.focusDiff = levelProject, false
+	m.level, m.focusDiff = levelSession, false
 	m.reader = nil
 	typeKey(m, '/')
 	for _, r := range "网站 hjq" {
@@ -164,5 +164,21 @@ func TestPreviewSeekDoesNotChangeFocus(t *testing.T) {
 	typeKey(m, 'K')
 	if m.diffOffset != 0 || m.focusDiff {
 		t.Fatal("K did not scroll the preview back")
+	}
+}
+
+func TestNavigationLayoutReducesRedundancy(t *testing.T) {
+	m := demoModel(t)
+	m.level, m.focusDiff = levelSession, false
+	columns := m.columns()
+	if len(columns) != 3 || columns[1].width <= columns[0].width || columns[1].width <= columns[2].width {
+		t.Fatalf("active column does not receive the most space: %+v", columns)
+	}
+	text := ansi.Strip(m.render())
+	if strings.Contains(text, "Enter 进入下一层") {
+		t.Fatal("navigation hints are still repeated in every column")
+	}
+	if count := strings.Count(text, "/demo/camera"); count != 1 {
+		t.Fatalf("selected path is repeated %d times", count)
 	}
 }
