@@ -149,6 +149,7 @@ func (m *model) openThread(id string, target navLevel) tea.Cmd {
 	if m.reader == nil || id == "" {
 		return nil
 	}
+	previousThread := m.opts.Preferences.LastThread
 	if m.cancelScan != nil {
 		m.cancelScan()
 	}
@@ -159,7 +160,10 @@ func (m *model) openThread(id string, target navLevel) tea.Cmd {
 	m.loading, m.err, m.status = true, "", "正在读取修改记录…"
 	m.level, m.focusDiff = target, target == levelHunk
 	m.hideFiles = false
-	m.fileQuery, m.filtering = "", false
+	m.fileQuery = ""
+	if target != levelSession {
+		m.filtering = false
+	}
 	m.fileCursor, m.fileOffset = 0, 0
 	m.editCursor, m.editOffset = 0, 0
 	m.hunkCursor, m.hunkOffset = 0, 0
@@ -168,6 +172,9 @@ func (m *model) openThread(id string, target navLevel) tea.Cmd {
 	m.hunks, m.hunksEditID = nil, ""
 	m.collapsed = make(map[string]bool)
 	m.highlights = highlightCache{}
+	if previousThread != id {
+		m.opts.Preferences.LastFile = ""
+	}
 	m.opts.Preferences.LastThread = id
 	updates := make(chan changes.Progress, 1)
 	m.updates = updates
@@ -226,6 +233,7 @@ func (m *model) Update(message tea.Msg) (tea.Model, tea.Cmd) {
 		if m.session.Thread.ID == "" && !m.loading {
 			m.status = "选择项目和会话，逐层查看修改"
 		}
+		return m, m.previewSelectedThread()
 	case scanMsg:
 		if msg.generation != m.generation {
 			return m, nil
@@ -289,14 +297,11 @@ func (m *model) Update(message tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyPressMsg:
 		return m, m.key(msg)
 	case tea.PasteMsg:
-		if m.level == levelProject || m.level == levelSession {
-			if m.level == levelProject {
-				m.level = levelSession
-				m.pickerQuery = ""
-			}
+		if m.filtering && m.level == levelSession {
 			m.pickerQuery += inputText(msg.Content)
 			m.pickerCursor = 0
 			m.filterThreads()
+			return m, m.previewSelectedThread()
 		} else if m.filtering {
 			m.fileQuery += inputText(msg.Content)
 			m.filterFiles("")
@@ -305,7 +310,7 @@ func (m *model) Update(message tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.MouseClickMsg:
 		return m, m.click(msg.Mouse())
 	case tea.MouseWheelMsg:
-		m.wheel(msg.Mouse())
+		return m, m.wheel(msg.Mouse())
 	}
 	return m, nil
 }
@@ -322,25 +327,7 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 		return nil
 	}
 	if m.filtering {
-		switch key {
-		case "enter":
-			m.filtering = false
-		case "esc":
-			m.filtering = false
-			m.fileQuery = ""
-		case "backspace":
-			m.fileQuery = backspace(m.fileQuery)
-		case "ctrl+u":
-			m.fileQuery = ""
-		default:
-			m.fileQuery += inputText(msg.Key().Text)
-		}
-		m.filterFiles("")
-		m.rebuildDiff()
-		return nil
-	}
-	if (m.level == levelProject || m.level == levelSession) && !m.focusDiff {
-		return m.upperKey(msg)
+		return m.filterKey(msg)
 	}
 	if key == "q" {
 		return tea.Quit
@@ -351,11 +338,13 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 	}
 	switch key {
 	case "s":
-		m.continuous, m.hideFiles, m.focusDiff = false, false, false
-		m.level = levelSession
-		m.pickerQuery = ""
-		m.syncUpperSelection()
-		m.filterThreads()
+		return m.showSessionPicker()
+	case "ctrl+r":
+		m.listLoading = true
+		if m.reader == nil {
+			return m.Init()
+		}
+		return m.listCmd()
 	case "r":
 		if m.reader == nil {
 			m.listLoading, m.err = true, ""
@@ -365,11 +354,20 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 	case "tab", "shift+tab":
 		m.cycleFocus(key == "shift+tab")
 	case "/", "f":
-		if m.level == levelFile || m.continuous {
+		if m.level <= levelSession {
+			m.level, m.focusDiff, m.hideFiles = levelSession, false, false
+			m.filtering = true
+			m.filterThreads()
+		} else if m.level == levelFile || m.continuous {
 			m.filtering, m.focusDiff, m.hideFiles = true, false, false
 			m.rebuildDiff()
 		}
 	case "esc":
+		if m.level == levelSession && m.pickerQuery != "" {
+			m.pickerQuery = ""
+			m.filterThreads()
+			return m.previewSelectedThread()
+		}
 		if m.level == levelFile && m.fileQuery != "" {
 			m.fileQuery = ""
 			m.filterFiles(m.selectedPath())
@@ -391,7 +389,9 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 		}
 		m.rebuildDiff()
 	case "c":
-		m.toggleContinuous()
+		if m.level >= levelDirectory {
+			m.toggleContinuous()
+		}
 	case "w":
 		m.opts.Preferences.Wrap = !m.opts.Preferences.Wrap
 		m.diffColumn = 0
@@ -406,27 +406,37 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 			return copyPath(path)
 		}
 	case "up", "k":
-		m.move(-1)
+		return m.move(-1)
 	case "down", "j":
-		m.move(1)
-	case "pgup", "ctrl+u":
-		m.move(-max(1, m.diffHeight()/2))
-	case "pgdown", "ctrl+d":
-		m.move(max(1, m.diffHeight()/2))
+		return m.move(1)
+	case "pgup", "ctrl+b":
+		return m.move(-m.pageSize(true))
+	case "pgdown", "ctrl+f":
+		return m.move(m.pageSize(true))
+	case "ctrl+u":
+		return m.move(-m.pageSize(false))
+	case "ctrl+d":
+		return m.move(m.pageSize(false))
 	case "home", "g":
 		if m.focusDiff {
 			m.diffOffset = 0
 			m.clamp()
 		} else {
-			m.move(-1 << 30)
+			return m.move(-1 << 30)
 		}
 	case "end", "G":
 		if m.focusDiff {
 			m.diffOffset = len(m.rows)
 			m.clamp()
 		} else {
-			m.move(1 << 30)
+			return m.move(1 << 30)
 		}
+	case "J":
+		m.diffOffset += 5
+		m.clamp()
+	case "K":
+		m.diffOffset -= 5
+		m.clamp()
 	case "left":
 		if m.focusDiff && !m.opts.Preferences.Wrap {
 			m.diffColumn = max(0, m.diffColumn-8)
@@ -453,57 +463,67 @@ func (m *model) key(msg tea.KeyPressMsg) tea.Cmd {
 	return nil
 }
 
-func (m *model) upperKey(msg tea.KeyPressMsg) tea.Cmd {
-	switch msg.String() {
-	case "ctrl+r":
-		if m.reader != nil {
-			m.listLoading = true
-			return m.listCmd()
-		}
-		return m.Init()
-	case "tab", "shift+tab":
-		m.cycleFocus(msg.String() == "shift+tab")
-	case "esc", "left":
-		if m.level == levelSession && m.pickerQuery != "" && msg.String() == "esc" {
+func (m *model) filterKey(msg tea.KeyPressMsg) tea.Cmd {
+	if m.level == levelSession {
+		switch msg.String() {
+		case "enter":
+			m.filtering = false
+			return nil
+		case "esc":
+			m.filtering = false
 			m.pickerQuery = ""
-			m.filterThreads()
-		} else {
-			m.back()
+		case "backspace":
+			m.pickerQuery = backspace(m.pickerQuery)
+		case "ctrl+u":
+			m.pickerQuery = ""
+		default:
+			m.pickerQuery += inputText(msg.Key().Text)
 		}
-	case "enter", "right":
-		return m.drillDown()
-	case "up":
-		m.move(-1)
-	case "down":
-		m.move(1)
-	case "backspace":
-		m.pickerQuery = backspace(m.pickerQuery)
 		m.pickerCursor = 0
 		m.filterThreads()
-	case "ctrl+u":
-		m.pickerQuery = ""
-		m.pickerCursor = 0
-		m.filterThreads()
-	case "pgup":
-		m.move(-max(1, m.listPage()/2))
-	case "pgdown", "ctrl+d":
-		m.move(max(1, m.listPage()/2))
-	case "home":
-		m.move(-1 << 30)
-	case "end":
-		m.move(1 << 30)
-	default:
-		text := inputText(msg.Key().Text)
-		if text != "" {
-			if m.level == levelProject {
-				m.level, m.pickerQuery = levelSession, ""
-			}
-			m.pickerQuery += text
-			m.pickerCursor = 0
-			m.filterThreads()
-		}
+		return m.previewSelectedThread()
 	}
+	switch msg.String() {
+	case "enter":
+		m.filtering = false
+	case "esc":
+		m.filtering = false
+		m.fileQuery = ""
+	case "backspace":
+		m.fileQuery = backspace(m.fileQuery)
+	case "ctrl+u":
+		m.fileQuery = ""
+	default:
+		m.fileQuery += inputText(msg.Key().Text)
+	}
+	m.filterFiles("")
+	m.rebuildDiff()
 	return nil
+}
+
+func (m *model) previewSelectedThread() tea.Cmd {
+	if m.level != levelSession || m.focusDiff || m.reader == nil {
+		return nil
+	}
+	id := m.selectedThreadID()
+	if id == "" || id == m.session.Thread.ID {
+		return nil
+	}
+	if m.loading && m.opts.Preferences.LastThread == id {
+		return nil
+	}
+	return m.openThread(id, levelSession)
+}
+
+func (m *model) pageSize(full bool) int {
+	size := m.listPage()
+	if m.focusDiff {
+		size = m.diffHeight()
+	}
+	if !full {
+		size /= 2
+	}
+	return max(1, size)
 }
 
 func (m *model) toggleTheme() {
@@ -529,10 +549,16 @@ func (m *model) drillDown() tea.Cmd {
 	case levelProject:
 		if len(m.matchingThreads) > 0 {
 			m.level = levelSession
+			return m.previewSelectedThread()
 		}
 	case levelSession:
 		if id := m.selectedThreadID(); id != "" {
-			return m.openThread(id, levelDirectory)
+			if id == m.session.Thread.ID || m.loading && m.opts.Preferences.LastThread == id {
+				m.level = levelDirectory
+				m.filtering = false
+			} else {
+				return m.openThread(id, levelDirectory)
+			}
 		}
 	case levelDirectory:
 		if len(m.files) > 0 {
@@ -619,11 +645,11 @@ func (m *model) toggleContinuous() {
 	}
 }
 
-func (m *model) move(delta int) {
+func (m *model) move(delta int) tea.Cmd {
 	if m.focusDiff {
 		m.diffOffset += delta
 		m.clamp()
-		return
+		return nil
 	}
 	switch m.level {
 	case levelProject:
@@ -647,6 +673,7 @@ func (m *model) move(delta int) {
 		m.hunkCursor += delta
 		m.hunkSelectionChanged()
 	}
+	return m.previewSelectedThread()
 }
 
 func (m *model) jumpEdit(direction int) {
@@ -749,12 +776,13 @@ func (m *model) diffWidth() int {
 	return max(1, m.width)
 }
 
-func (m *model) showSessionPicker() {
+func (m *model) showSessionPicker() tea.Cmd {
 	m.continuous, m.hideFiles, m.focusDiff = false, false, false
 	m.level = levelSession
 	m.pickerQuery = ""
 	m.syncUpperSelection()
 	m.filterThreads()
+	return m.previewSelectedThread()
 }
 
 func (m *model) click(mouse tea.Mouse) tea.Cmd {
@@ -762,8 +790,7 @@ func (m *model) click(mouse tea.Mouse) tea.Cmd {
 		return nil
 	}
 	if mouse.Y <= 1 {
-		m.showSessionPicker()
-		return nil
+		return m.showSessionPicker()
 	}
 	column := m.columnAt(mouse.X)
 	if column == nil || mouse.Y < 3 || mouse.Y >= m.height-2 {
@@ -791,29 +818,29 @@ func (m *model) click(mouse tea.Mouse) tea.Cmd {
 	if !m.setCursor(m.level, index) {
 		return nil
 	}
-	return nil
+	return m.previewSelectedThread()
 }
 
-func (m *model) wheel(mouse tea.Mouse) {
+func (m *model) wheel(mouse tea.Mouse) tea.Cmd {
 	if m.help {
-		return
+		return nil
 	}
 	delta := 3
 	if mouse.Button == tea.MouseWheelUp {
 		delta = -3
 	} else if mouse.Button != tea.MouseWheelDown {
-		return
+		return nil
 	}
 	column := m.columnAt(mouse.X)
 	if column == nil {
-		return
+		return nil
 	}
 	if column.diff {
 		m.focusDiff = true
 	} else {
 		m.level, m.focusDiff = column.level, false
 	}
-	m.move(delta)
+	return m.move(delta)
 }
 
 func (m *model) listOffset(level navLevel) int {

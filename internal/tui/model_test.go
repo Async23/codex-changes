@@ -64,6 +64,8 @@ func TestFindFileWithoutBrowsingTurns(t *testing.T) {
 func TestTypingSpacesAndUnicodeBackspace(t *testing.T) {
 	m := demoModel(t)
 	m.level, m.focusDiff = levelSession, false
+	m.reader = nil
+	typeKey(m, '/')
 	for _, r := range "camera 中文" {
 		typeKey(m, r)
 	}

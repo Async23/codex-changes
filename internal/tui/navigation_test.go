@@ -6,6 +6,7 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 	"github.com/Async23/codex-changes/internal/changes"
+	"github.com/Async23/codex-changes/internal/codex"
 	"github.com/charmbracelet/x/ansi"
 )
 
@@ -63,9 +64,11 @@ func TestHunkSelectionLimitsRenderedDiff(t *testing.T) {
 	}
 }
 
-func TestUpperLevelsPreserveTextSearch(t *testing.T) {
+func TestExplicitSessionSearchPreservesText(t *testing.T) {
 	m := demoModel(t)
 	m.level, m.focusDiff = levelProject, false
+	m.reader = nil
+	typeKey(m, '/')
 	for _, r := range "网站 hjq" {
 		typeKey(m, r)
 	}
@@ -89,5 +92,77 @@ func TestBackReturnsThroughHierarchy(t *testing.T) {
 		if m.level != want {
 			t.Fatalf("back reached level %d, want %d", m.level, want)
 		}
+	}
+}
+
+func TestYaziKeysWorkAtUpperLevels(t *testing.T) {
+	m := demoModel(t)
+	m.reader = nil // Keep navigation synchronous; automatic loading has its own test below.
+	m.threads = append(m.threads, codex.Thread{ID: "synthetic-second", Name: "第二个会话", CWD: "/demo/camera"})
+	m.rebuildProjects()
+	m.selectProjectForThread("demo-camera")
+	m.level, m.focusDiff = levelSession, false
+	m.filterThreads()
+	typeKey(m, 'j')
+	if m.pickerCursor != 1 {
+		t.Fatal("j did not select the next session")
+	}
+	typeKey(m, 'k')
+	if m.pickerCursor != 0 {
+		t.Fatal("k did not select the previous session")
+	}
+	typeKey(m, 'h')
+	if m.level != levelProject {
+		t.Fatal("h did not return to projects")
+	}
+	typeKey(m, 'l')
+	if m.level != levelSession {
+		t.Fatal("l did not enter sessions")
+	}
+}
+
+func TestSessionHoverAutomaticallyLoads(t *testing.T) {
+	m := demoModel(t)
+	m.level, m.focusDiff = levelSession, false
+	m.pickerQuery = "网站"
+	m.opts.Preferences.LastFile = "/demo/camera/notes/读出时间.md"
+	m.filterThreads()
+	cmd := m.previewSelectedThread()
+	if cmd == nil {
+		t.Fatal("hovering another session did not start loading")
+	}
+	if m.opts.Preferences.LastFile != "" {
+		t.Fatal("session preview inherited the previous session's file")
+	}
+	generation := m.generation
+	m.drillDown()
+	if m.level != levelDirectory || m.generation != generation {
+		t.Fatal("entering a loading session restarted its scan")
+	}
+	for step := 0; cmd != nil && step < 32; step++ {
+		msg := cmd()
+		if msg == nil {
+			break
+		}
+		_, next := m.Update(msg)
+		cmd = next
+	}
+	if m.loading || m.session.Thread.ID != "demo-website" || len(m.directories) != 1 {
+		t.Fatalf("automatic preview did not finish: loading=%v session=%q directories=%d", m.loading, m.session.Thread.ID, len(m.directories))
+	}
+}
+
+func TestPreviewSeekDoesNotChangeFocus(t *testing.T) {
+	m := demoModel(t)
+	m.height = 12
+	m.level, m.focusDiff = levelHunk, false
+	m.rebuildDiff()
+	typeKey(m, 'J')
+	if m.diffOffset == 0 || m.focusDiff {
+		t.Fatal("J did not scroll the preview without changing focus")
+	}
+	typeKey(m, 'K')
+	if m.diffOffset != 0 || m.focusDiff {
+		t.Fatal("K did not scroll the preview back")
 	}
 }

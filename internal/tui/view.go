@@ -103,11 +103,7 @@ func (m *model) brandRow() string {
 		label = "DEMO · 合成数据"
 	}
 	left := " " + style(p.accent).Bold(true).Render("CODEX CHANGES") + "  " + style(p.muted).Render(label)
-	right := "s 会话  ? 帮助 "
-	if m.level <= levelSession && !m.focusDiff && !m.help {
-		right = "输入搜索  Ctrl+C 退出 "
-	}
-	return between(left, style(p.muted).Render(right), m.width)
+	return between(left, style(p.muted).Render("s 会话  ? 帮助 "), m.width)
 }
 
 type column struct {
@@ -297,18 +293,14 @@ func (m *model) mainRows() []string {
 	}
 	hints := " ↑↓ 选择  ←→ 层级  Enter 展开  / 筛文件  " + toggle + "  s 会话"
 	if m.level <= levelSession {
-		hints = " ↑↓ 选择  ←→ 层级  Enter 打开  输入筛选  Ctrl+R 刷新"
+		hints = " ↑↓/jk 选择  ←→/hl 层级  Enter 打开  / 搜索"
 	} else if m.focusDiff {
 		hints = " ↑↓ 滚动  Esc 返回  [ ] 修改  " + toggle + "  v 并排  w 换行"
 	}
 	if m.narrow() {
 		hints = " ↑↓ 移动  Enter 进入  Esc 返回  s 会话  " + toggle
 	}
-	right := "? 帮助  q 退出 "
-	if m.level <= levelSession {
-		right = "Ctrl+C 退出 "
-	}
-	rows = append(rows, between(style(p.muted).Render(hints), style(p.accent).Render(right), m.width))
+	rows = append(rows, between(style(p.muted).Render(hints), style(p.accent).Render("? 帮助  q 退出 "), m.width))
 	return rows
 }
 
@@ -385,10 +377,10 @@ func (m *model) navigationRows(level navLevel, width int) []string {
 	rows := []string{fit(style(p.accent).Bold(true).Render(fmt.Sprintf("%s %s %d", focus, levelTitle(level), count)), width)}
 	hint := "Enter 进入下一层"
 	if level == levelSession {
-		hint = "输入搜索全部会话"
+		hint = "/ 搜索全部会话"
 		if m.pickerQuery != "" {
 			hint = "/ " + m.pickerQuery
-			if m.level == levelSession && !m.focusDiff {
+			if m.filtering && m.level == levelSession {
 				hint += "▏"
 			}
 		}
@@ -557,11 +549,12 @@ func (m *model) helpRows() []string {
 		"  ← → / h l  返回或进入层级     Enter  展开；在差异中进入阅读",
 		"  ↑↓ / j k   选择或滚动         Tab / Shift+Tab  切换可见区域",
 		"  鼠标点击选择；滚轮滚动鼠标所在区域。",
-		"  输入文字搜索会话；Ctrl+R 刷新会话列表。",
+		"  / 或 f     输入会话搜索；Enter 接受，Esc 取消；Ctrl+R 刷新列表",
 		"  / 或 f     过滤当前目录中的文件；Esc 清除筛选或返回",
 		"  c          单块 / 连续时间线    [ / ]  上一条 / 下一条修改",
 		"  Space      连续模式中折叠或展开当前修改",
 		"  v          单栏 / 并排          w  自动换行 / 横向滚动",
+		"  J / K      滚动右侧 diff 预览，无需切换焦点",
 		"  不换行且聚焦差异时，← → 横向滚动；h 返回差异块。",
 		"  b          隐藏 / 显示导航      t  跟随终端 / 深色 / 浅色",
 		"  y          复制完整路径         r  重新读取当前会话",
